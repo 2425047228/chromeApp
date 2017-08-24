@@ -1,0 +1,47 @@
+{
+    "name": "MyExtension",
+    "version": "1.0",
+    "description": "我的第一个Chrome扩展",
+    // 访问host权限
+    "permissions": [
+        "tabs",    //标签权限
+        "bookmarks",    //添加对书签操作的权限
+        "notifications",    //开启桌面提醒权限
+        "storage",    //声明调用chrome存储api
+        "contextMenus",    //添加右键菜单权限
+        "http://www.myhost.com",    //添加跨域连接
+        "downloads",    //下载权限
+        "unlimitedStorage",
+        "webRequest",    //网络请求权限
+        "webRequestBlocking",    //阻止网络请求权限
+        "proxy",    //扩展使用代理接口
+        "system.cpu",    //获取cpu
+        "system.memory",    //内存
+        "system.storage"    //存储信息
+    ],
+    "app": {
+        "background": {
+            "scripts": ["./script/background.js"]    //packaged app 事件监听脚本
+        }
+    },
+    "icons": {
+        "16": "images/icon16.png",    //同时还要在icons域声明16像素尺寸的图标，这样在右键菜单中才会显示出扩展的图标
+        "48": "images/icon48.png",
+        "128": "images/icon128.png"
+    },
+    "background": {
+        "scripts": [
+            //"js/status.js"    常驻后台脚本
+        ],
+        "persistent":false    //默认true，表示扩展将一直在后台运行，无论其是否正在工作；当其值为false时，表示扩展在后台按需运行
+
+    },
+    "browser_action": {
+        "default_icon": {
+            "19": "images/icon19.png",
+            "38": "images/icon38.png"
+        },
+        "default_title": "我的时钟",
+        "default_popup": "popup.html"
+    }
+}
