@@ -3,11 +3,9 @@ chrome.app.runtime.onLaunched.addListener(function() {    //packaged app 初始�
         id: 'MyWindowID',
         bounds: {
             width: 800,
-            height: 600,
-            left: 100,
-            top: 100
+            height: 600
         },
-        minWidth: 800,
-        minHeight: 600
+        minWidth: 400,
+        minHeight: 400
     });
 });
