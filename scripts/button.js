@@ -13,3 +13,8 @@ core.byId("change").onclick = function() {
         iframe.src = './admin.html';
     } else {iframe.src = './index.html';}
 }
+//core.byId('close').onclick = function () {
+    //console.log(chrome.app.window.current().id);
+    //chrome.app.window.current().close();
+    //location.href = "./new.html";
+//}
