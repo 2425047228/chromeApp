@@ -7,11 +7,20 @@
     <link rel="stylesheet" href="../css/login.css">
 </head>
 <body id="login">
-    <div class="clearfix"><img src="../images/x.png" class="right"></div>
-    <div>
-        <h1>登陆</h1>
-        <input type="button" value="关闭" id="close" class="btn btn-blue">
-    </div>
+    <div class="clearfix"><img src="../images/x.png" class="right" id="close"></div>
+    <section class="login-area">
+        <div class="login-input-area">
+            <label for="account" class="login-label">电&nbsp;话：</label><input type="text" id="account">
+        </div>
+        <div class="login-input-area">
+            <label for="passwd" class="login-label">密&nbsp;码：</label><input type="text" id="passwd">
+        </div>
+        <div class="login-button-area">
+            <label class="login-label">&emsp;&nbsp;&emsp;&emsp;</label><input type="button" value="登陆">
+        </div>
+        <div class="forgot-passwd">忘记密码？</div>
+        <div class="login-protocol">点击登录，即表示您同意<span>用户协议</span></div>
+    </section>
     <script src="../scripts/core.js"></script>
     <script src="../scripts/login.js"></script>
 </body>

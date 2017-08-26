@@ -3,30 +3,22 @@ body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,fieldset,legend,input,textarea,s
     margin:0;padding:0;
 } 
 body{
-    font:12px"宋体","Arial Narrow",HELVETICA;
+    font:14px"宋体","Arial Narrow",HELVETICA;
     background:#fff;
     -webkit-text-size-adjust:100%;
 } 
-a{
-    color:#2d374b;
-    text-decoration:none;
-} 
-a:hover{
-    color:#cd0200;
-    text-decoration:underline;
-} 
+a{color:#2d374b;text-decoration:none;} 
+a:hover{color:#cd0200;text-decoration:underline;} 
 em{font-style:normal} 
 li{list-style:none} 
 img{border:0;vertical-align:middle} 
 table{border-collapse:collapse;border-spacing:0} 
 p{word-wrap:break-word} 
-input,button{outline: none}
+input[type=button],input[type=submit],input[type=reset],button{outline: none;border:0;}
 /* 公共css样式部分 */
 .right{float: right;}
 .left{float: left;}
 .clearfix::before, .clearfix::after{
     content: "";height: 0;line-height: 0;display: block;visibility: hidden;clear: both;
 }
-.bgc{
-    background: red;
-}
+.bgc{background:rgba(255, 205, 65, 0.4);}
