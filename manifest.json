@@ -1,5 +1,5 @@
 {
-    "name": "MyApp",
+    "name": "诗奈尔商家端",
     "version": "1.0.0",
     "manifest_version":2,
     // 访问host权限
@@ -29,7 +29,7 @@
         //}     
     },
     "icons": {
-        "128": "./images/icon128.png"
+        "128": "./images/128.png"
     }
     //"background": {
     //    "scripts": [

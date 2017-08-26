@@ -14,10 +14,6 @@ core.byId("change").onclick = function() {
     } else {iframe.src = './index.html';}
 }
 core.byId("open").onclick = function() {
-    //var allWindow = chrome.app.window.getAll();
-    //console.log(allWindow);
-    //return false;
-    //chrome.app.window.current().close();
     chrome.app.window.create('../views/new.html', {
         id: 'newser',
         bounds: {
@@ -25,7 +21,6 @@ core.byId("open").onclick = function() {
             height: 400
         }
     });
-    //chrome.app.window.current().close();
 }
 //core.byId('close').onclick = function () {
     //console.log(chrome.app.window.current().id);
