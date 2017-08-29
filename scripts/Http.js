@@ -1,5 +1,5 @@
 /**
- * 网络请求封装函数
+ * 网络请求封装函数对象
  * @author yangyunlong
  */
 (function(window) {
@@ -11,10 +11,11 @@
     * @param callback 回调函数
     */
     h.get = function(url, callback) {
-        this.xhr.open("GET", url, true);
-        this.xhr.onreadystatechange = function() {
-            if (this.xhr.readyState == 4) {
-                typeof callback === "function" && callback(xhr.responseText);
+        var xmlHttp = this.xhr;
+        xmlHttp.open("GET", url, true);
+        xmlHttp.onreadystatechange = function() {
+            if (xmlHttp.readyState == 4) {
+                typeof callback === "function" && callback(xmlHttp.responseText);
             }
         }
         this.xhr.send();
@@ -27,14 +28,31 @@
     * @param callback 回调函数
     */
     h.post = function(url, args, callback) {
-        this.xhr.open("POST", url, true);
-        this.xhr.onreadystatechange = function() {
-            if (this.xhr.readyState == 4) {
-                typeof callback === "function" && callback(xhr.responseText);
+        var xmlHttp = this.xhr;
+        if (typeof args === "object") args = this.toParamString(args);
+        xmlHttp.open("POST", url, true);
+        xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xmlHttp.onreadystatechange = function() {
+            if (4 == xmlHttp.readyState) {
+                typeof callback === "function" && callback(xmlHttp.responseText);
             }
         }
         this.xhr.send(args);
     }
 
-    window.Http = h;    //赋值全局window
+   /**
+    * 对象转参数字符串
+    * @param obj 对象参数
+    * @return string 参数字符串
+    */ 
+    h.toParamString = function (obj) {
+        if (typeof obj !== "object") return obj;
+        var param = '';
+        for (var k in obj) {
+            param += k+'='+obj[k]+'&';
+        }
+        return param;
+    }
+
+    window.http = h;    //赋值全局window
 })(window)

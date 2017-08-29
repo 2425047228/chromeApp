@@ -1,7 +1,8 @@
 #login{background: url(../images/login.jpg) no-repeat 0 0;}
 .login-area{padding-top: 87px;padding-left: 104px;}
 .login-input-area {margin-bottom: 12px;}
-.login-input-area>input[type=text]{
+.login-input-area>input[type=text],
+.login-input-area>input[type=password]{
     height: 26px;width: 186px;
     border: 1px solid rgb(167, 199, 230);
     box-shadow: -1px -1px 1px rgb(171, 201, 231);
