@@ -1,6 +1,6 @@
 "use strict"
 window.onload = function () {
-    core.closeListener();
+    core.closeListener(true,function(){core.storage.clear();});
     core.byId("verify").onclick = function () {
         //获取表单信息并使用别名
         var args = core.dataByIds(["account","username"],["passwd","password"]);
@@ -11,7 +11,15 @@ window.onload = function () {
             var data = core.jsonParse(json);
             if (!core.apiVerify(data)) return core.notice(data.status,{top:240});
             var result = data.data;
-            core.storage.set({role:result.role,token:result.token,clerk:result.uid});
+            core.storage.set(
+                {
+                    role:result.role,
+                    token:result.token,
+                    clerk:result.uid
+                }, 
+                function(){
+                    chrome.app.window.create("../views/main.html", {id: "main",state: "fullscreen"});
+            });
         });
     }
 }

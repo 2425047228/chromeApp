@@ -16,6 +16,7 @@ table{border-collapse:collapse;border-spacing:0}
 p{word-wrap:break-word} 
 input[type=button],input[type=submit],input[type=reset],button{outline: none;border:0;}
 /* 公共css样式部分 */
+.drag{-webkit-app-region: drag;}    /*允许拉拽拖动*/
 .right{float: right;}
 .left{float: left;}
 .clearfix::before, .clearfix::after{

@@ -1,4 +1,5 @@
 "use strict"
-window.onload = function () {
-    core.byId('clock').innerText = ' is' + new Date();
-}
+ window.onload = function () {
+     console.log(location);
+     core.byId('clock').innerText = ' is' + new Date();
+ }

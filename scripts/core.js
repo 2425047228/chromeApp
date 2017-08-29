@@ -115,12 +115,18 @@
         }
     }
     //监听id=close的节点为窗口关闭    stream为事件流 默认true
-    c.closeListener = function (stream) {
+    c.closeListener = function (stream,callback) {
         var closer = this.byId("close");    //获取close节点
         if (typeof closer !== "undefined") {    //判断节点是否存在
             var that = this;
             if (typeof stream !== "boolean") stream = true;
-            closer.addEventListener("click",function(){that.close();}, stream);
+            closer.addEventListener(
+                "click",
+                function(){
+                    typeof callback === "function" && callback();
+                    that.close();
+                }, 
+                stream);
         }
     }
     //获取当前窗口
