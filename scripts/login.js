@@ -12,14 +12,14 @@ window.onload = function () {
             if (!core.apiVerify(data)) return core.notice(data.status,{top:240});
             var result = data.data;
             core.storage.set(
-                {
-                    role:result.role,
-                    token:result.token,
-                    clerk:result.uid
-                }, 
+                {role:result.role,token:result.token,clerk:result.uid}, 
                 function(){
-                    chrome.app.window.create("../views/main.html", {id: "main",state: "fullscreen"});
-            });
+                    chrome.app.window.create(
+                        "../views/main.html?from=login", 
+                        {id: "main",state: "fullscreen"}
+                    );
+                }
+            );
         });
     }
 }
