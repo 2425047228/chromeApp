@@ -7,11 +7,11 @@
         //"fileSystem",    //读取文件权限
         //{"fileSystem": ["write", "directory"]},    //写入文件及读取目录权限
         "http://xiyi.wzj.dev.shuxier.com/*",    //测试域名权限注册
-        "http://clean.shuxier.com/*"            //正式域名权限注册
+        "http://clean.shuxier.com/*",            //正式域名权限注册
         //"tabs",    //标签权限
         //"bookmarks",    //添加对书签操作的权限
         //"notifications",    //开启桌面提醒权限
-        //"storage",    //声明调用chrome存储api
+        "storage"    //声明调用chrome存储api
         //"contextMenus",    //添加右键菜单权限
         //"downloads",    //下载权限
         //"unlimitedStorage",
