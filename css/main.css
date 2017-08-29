@@ -1,3 +1,13 @@
+header{background: url(../images/header-bg.png);width: 1920px;height: 101px;}
+header>.left{
+    font-size: 32px;
+    font-weight: bold;
+    height: 100px;
+    padding-left: 28px;
+    color: rgb(255, 255, 255);
+    line-height: 101px;
+}
+header>.right{padding-right: 26px;}
 #clock {
     background: yellow;
 }

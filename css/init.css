@@ -1,5 +1,5 @@
 /* 初始化样式 */
-body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,fieldset,legend,input,textarea,select,div{
+body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,input,textarea,select,div,header,section,label{
     margin:0;padding:0;
 } 
 body{
