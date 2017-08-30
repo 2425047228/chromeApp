@@ -1,4 +1,4 @@
-#bg{background: #09b1b0;width: 100%;height: 900px;border:1px solid red}
+#bg{background: #09b1b0;width: 100%;height: 45rem;border: 1px solid red;}
 #bg,#bg>header,#logout,
 #bg>section,#bg>section>.left,#bg>section>.right{
     box-sizing: border-box;
@@ -7,43 +7,43 @@
 #bg>header{
     background: url(../images/header-bg.png) no-repeat 0 0;
     width: 100%;
-    height: 101px;
+    height: 5.05rem;
     background-size: 100% 100%;
 }
-#bg>header>.left,#bg>header>.right{color: rgb(255, 255, 255);line-height: 101px;}
+#bg>header>.left,#bg>header>.right{color: rgb(255, 255, 255);line-height: 5.05rem;}
 #bg>header>.left{
-    font-size: 32px;
+    font-size: 1.6rem;
     font-weight: bold;
-    height: 100px;
-    padding-left: 28px;
+    height: 5rem;
+    padding-left: 1.4rem;
 }
-#bg>header>.right{padding-right: 26px;}
+#bg>header>.right{padding-right: 1.3rem;}
 #bg>header>.right>span{
-    margin-right: 50px;padding-left: 34px;padding-top: 6px;
+    margin-right: 2.5rem;padding-left: 1.7rem;padding-top: 0.3rem;
 }
 #bg>header>.right>span:first-of-type{
     background: url(../images/feedback.png) no-repeat;
 }
 #bg>header>.right>span:last-of-type{
     background: url(../images/password.png) no-repeat;
-    background-size: 25px 25px;
+    background-size: 1.25rem 1.25rem;
 }
-#bg>header>.right>span,#logout{font-size: 18px;}
+#bg>header>.right>span,#logout{font-size: 0.9rem;}
 #logout{
     background: rgb(78, 174, 175);
     color: rgb(255, 255, 255);
     border: 1px solid rgb(59,131,130);
-    padding: 7px 15px;
+    padding: 0.35rem 0.75rem;
     border-radius: 3px;
 }
 #bg>section{
-    padding: 11px 11px 32px 11px;
+    padding: 0.55rem 0.55rem 1.6rem 0.55rem;
 }
 #bg>section>.left,#bg>section>.right{
     background:rgb(255, 255, 255);
     border: 2px solid #038281;
     height: 100%;
 }
-#bg>section>aside{width: 232px;}
-#bg>section>section{width: 1175px;}
+#bg>section>aside{width: 11.6rem;}
+#bg>section>section{width: 82.5rem;}
 iframe{width:100%;height:100%;}
