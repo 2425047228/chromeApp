@@ -7,10 +7,7 @@ chrome.app.runtime.onLaunched.addListener(function() {    //packaged app 初始�
         if (validator && validator2 && validator3) {    //已登陆状态时显示主页
             var main  = chrome.app.window.get("main");
             if (main) return main.show();
-            chrome.app.window.create("../views/main.html", {id: "main",bounds: {
-                width: 1920,
-                height: 1080
-            }});
+            chrome.app.window.create("../views/main.html", {id: "main",state: "fullscreen"});
         } else {    //未登录时显示登录页面
             var login = chrome.app.window.get("login");
             if (login) return login.show();
