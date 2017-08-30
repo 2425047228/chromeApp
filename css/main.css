@@ -1,4 +1,4 @@
-body{background: #09b1b0;width: 1440px;}
+body{background: #09b1b0;}
 body>header,#logout,
 body>section,body>section>.left,body>section>.right{
     box-sizing: border-box;
@@ -50,5 +50,8 @@ body>section>aside{width: 232px;}
 }
 @media screen and (max-width:1440px) {
     body>section>section{width: 1175px;}
+}
+@media screen and (max-width:1000px) {
+    body>section>section{width: 200px;}
 }
 iframe{width:100%;height:100%;}
