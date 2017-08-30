@@ -1,31 +1,49 @@
-header{background: url(../images/header-bg.png);width: 1920px;height: 101px;}
-header>.left{
+#bg{background: #09b1b0;width: 100%;height: 900px;border:1px solid red;}
+#bg,#bg>header,#logout,
+#bg>section,#bg>section>.left,#bg>section>.right{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+#bg>header{
+    background: url(../images/header-bg.png) no-repeat 0 0;
+    width: 100%;
+    height: 101px;
+    background-size: 100% 100%;
+}
+#bg>header>.left,#bg>header>.right{color: rgb(255, 255, 255);line-height: 101px;}
+#bg>header>.left{
     font-size: 32px;
     font-weight: bold;
     height: 100px;
     padding-left: 28px;
-    color: rgb(255, 255, 255);
-    line-height: 101px;
 }
-header>.right{padding-right: 26px;}
-#bg{background: #09b1b0;}
-#bg>.left{
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+#bg>header>.right{padding-right: 26px;}
+#bg>header>.right>span{
+    margin-right: 50px;padding-left: 34px;padding-top: 6px;
+}
+#bg>header>.right>span:first-of-type{
+    background: url(../images/feedback.png) no-repeat;
+}
+#bg>header>.right>span:last-of-type{
+    background: url(../images/password.png) no-repeat;
+    background-size: 25px 25px;
+}
+#bg>header>.right>span,#logout{font-size: 18px;}
+#logout{
+    background: rgb(78, 174, 175);
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(59,131,130);
+    padding: 7px 15px;
+    border-radius: 3px;
+}
+#bg>section{
+    padding: 11px 11px 32px 11px;
+}
+#bg>section>.left,#bg>section>.right{
+    background:rgb(255, 255, 255);
     border: 2px solid #038281;
     height: 100%;
-    margin: 11px 0 30px 11px;
 }
-#bg>.left{
-    width: 232px;
-    height: 915px;
-}
-iframe{width:100%;height:100%;background:rgb(255, 255, 255)}
-#clock {
-    background: yellow;
-}
-#banner{
-    background: lightblue;
-    width: 100%;
-    height: 100px;
-}
+#bg>section>aside{width: 232px;}
+#bg>section>section{width: 1175px;}
+iframe{width:100%;height:100%;}
