@@ -1,4 +1,4 @@
-#bg{background: #09b1b0;width: 100%;height: 90.0rem;border:1px solid red;}
+#bg{background: #09b1b0;width: 100%;height: 900px;border:1px solid red}
 #bg,#bg>header,#logout,
 #bg>section,#bg>section>.left,#bg>section>.right{
     box-sizing: border-box;
@@ -12,7 +12,7 @@
 }
 #bg>header>.left,#bg>header>.right{color: rgb(255, 255, 255);line-height: 101px;}
 #bg>header>.left{
-    font-size: 3.2rem;
+    font-size: 32px;
     font-weight: bold;
     height: 100px;
     padding-left: 28px;
