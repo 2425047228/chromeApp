@@ -49,6 +49,10 @@ body>section>aside{width: 232px;}
     body{width: 1920px;}
     body>section>section{width: 1652px;}
 }
+@media screen and (max-width:1540px) {
+    body{width: 1540px;}
+    body>section>section{width: 1275px;}
+}
 @media screen and (max-width:1440px) {
     body{width: 1440px;}
     body>section>section{width: 1175px;}
