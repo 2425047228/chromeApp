@@ -1,4 +1,4 @@
-body{background: #09b1b0;}
+body{background: #09b1b0;width: 1440px;}
 body>header,#logout,
 body>section,body>section>.left,body>section>.right{
     box-sizing: border-box;
@@ -6,7 +6,9 @@ body>section,body>section>.left,body>section>.right{
 }
 body>header{
     background: url(../images/header-bg.png) no-repeat 0 0;
+    width: 100%;
     height: 101px;
+    background-size: 100% 100%;
 }
 body>header>.left,body>header>.right{color: rgb(255, 255, 255);line-height: 101px;}
 body>header>.left{
@@ -43,5 +45,10 @@ body>section>.left,body>section>.right{
     height: 100%;
 }
 body>section>aside{width: 232px;}
-body>section>section{width: 1650px;}
+@media screen and (max-width:1920px) {
+    body>section>section{width: 1652px;}
+}
+@media screen and (max-width:1440px) {
+    body>section>section{width: 1175px;}
+}
 iframe{width:100%;height:100%;}
