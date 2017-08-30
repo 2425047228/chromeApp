@@ -1,34 +1,32 @@
-#bg{background: #09b1b0;width: 100%;height: 900px;border: 1px solid red;}
-#bg,#bg>header,#logout,
-#bg>section,#bg>section>.left,#bg>section>.right{
+body{background: #09b1b0;}
+body>header,#logout,
+body>section,body>section>.left,body>section>.right{
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
 }
-#bg>header{
+body>header{
     background: url(../images/header-bg.png) no-repeat 0 0;
-    width: 100%;
     height: 101px;
-    background-size: 100% 100%;
 }
-#bg>header>.left,#bg>header>.right{color: rgb(255, 255, 255);line-height: 101px;}
-#bg>header>.left{
+body>header>.left,body>header>.right{color: rgb(255, 255, 255);line-height: 101px;}
+body>header>.left{
     font-size: 32px;
     font-weight: bold;
     height: 100px;
     padding-left: 28px;
 }
-#bg>header>.right{padding-right: 26px;}
-#bg>header>.right>span{
+body>header>.right{padding-right: 26px;}
+body>header>.right>span{
     margin-right: 50px;padding-left: 34px;padding-top: 6px;
 }
-#bg>header>.right>span:first-of-type{
+body>header>.right>span:first-of-type{
     background: url(../images/feedback.png) no-repeat;
 }
-#bg>header>.right>span:last-of-type{
+body>header>.right>span:last-of-type{
     background: url(../images/password.png) no-repeat;
     background-size: 25px 25px;
 }
-#bg>header>.right>span,#logout{font-size: 18px;}
+body>header>.right>span,#logout{font-size: 18px;}
 #logout{
     background: rgb(78, 174, 175);
     color: rgb(255, 255, 255);
@@ -36,14 +34,14 @@
     padding: 7px 15px;
     border-radius: 3px;
 }
-#bg>section{
+body>section{
     padding: 11px 11px 32px 11px;
 }
-#bg>section>.left,#bg>section>.right{
+body>section>.left,body>section>.right{
     background:rgb(255, 255, 255);
     border: 2px solid #038281;
     height: 100%;
 }
-#bg>section>aside{width: 232px;}
-#bg>section>section{width: 1650px;}
+body>section>aside{width: 232px;}
+body>section>section{width: 1650px;}
 iframe{width:100%;height:100%;}
