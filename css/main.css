@@ -8,6 +8,19 @@ header>.left{
     line-height: 101px;
 }
 header>.right{padding-right: 26px;}
+#bg{background: #09b1b0;}
+#bg>.left{
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 2px solid #038281;
+    height: 100%;
+    margin: 11px 0 30px 11px;
+}
+#bg>.left{
+    width: 232px;
+    height: 915px;
+}
+iframe{width:100%;height:100%;background:rgb(255, 255, 255)}
 #clock {
     background: yellow;
 }

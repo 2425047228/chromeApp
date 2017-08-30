@@ -23,8 +23,3 @@ core.byId("open").onclick = function() {
         }
     });
 }
-core.byId('close').onclick = function () {
-    console.log(chrome.app.window.current().id);
-    chrome.app.window.current().close();
-    location.href = "./new.html";
-}
