@@ -15,6 +15,8 @@
         xhr:new XMLHttpRequest(),    //创建ajax对象
         storage:chrome.storage.local,    //需在manifest中注册storage权限
         byId:function (id) {return document.getElementById(id);},    //获取指定id节点
+        byClass:function (className) {return document.getElementsByClassName(className);},
+        byTagName:function (tagName) {return document.getElementsByTagName(tagName);},
         formValidator:new formValidator(),    //表单验证器
         validatorSwitch:true    //表单验证器开关，默认开启
     };
@@ -133,7 +135,23 @@
     c.current = function () {return chrome.app.window.current();}
     //获取指定id的窗口
     c.windowById = function (id) {return chrome.app.window.get(id);}
-
+    /********************************iframe操作*******************************/
+    //iframe 点击加载iframe页面事件监听    class="redirect"    data-url="跳转地址"
+    c.iframeRedirectListener = function() {
+        var nodes = this.byClass("redirect");
+        if ("object" !== typeof nodes) return false;
+        var len = nodes.length;
+        if (len > 0) {
+            var url = null;
+            var iframe = this.byTagName("iframe")[0];
+            for (var i = 0;i < len;++i) {
+                nodes[i].onclick = function () {
+                    url = this.getAttribute("data-url");
+                    if (url.length > 1) iframe.src = url;
+                }
+            }
+        }
+    }
     /***************************网络请求操作*****************************/
     /**
     * get方式发送http请求

@@ -5,4 +5,5 @@
      core.byId("logout").onclick = function () {
          //退出处理ßß
      }
+     core.iframeRedirectListener();    //监听跳转
  }
