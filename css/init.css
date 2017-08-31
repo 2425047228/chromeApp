@@ -1,16 +1,8 @@
 /* 初始化样式 */
-html,body{
-    height: 100%;
-    width: 100%;
-    min-width: 1024px;
-    max-width: 1920px;
-    min-height: 600px;
-    max-height: 1080px;
-}
 body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,input,textarea,select,div,
 header,section,label,iframe,aside{
     margin:0;padding:0;
-} 
+}
 body{
     font:14px"宋体",sans-serif;
     background:#fff;

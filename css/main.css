@@ -1,3 +1,4 @@
+@import "screen.css";
 #bg{background: #09b1b0;}
 #bg>header,#logout,
 #bg>section,#bg>section>.left,#bg>section>.right{
