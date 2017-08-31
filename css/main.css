@@ -30,11 +30,12 @@
 }
 #bg>header>.right>span,#logout{font-size: 18px;}
 #logout{
-    background: rgb(78, 174, 175);
+    background: url(../images/logout.png);
     color: rgb(255, 255, 255);
-    border: 1px solid rgb(59,131,130);
-    padding: 7px 15px;
-    border-radius: 3px;
+    /* border: 1px solid rgb(59,131,130);
+    padding: 7px 15px; */
+    width: 71px;height: 34px;
+    /* border-radius: 3px; */
 }
 #bg>section{
     padding: 11px;
