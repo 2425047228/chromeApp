@@ -1,7 +1,11 @@
 "use strict"
 window.onload = function () {
     core.closeListener(true,function(){core.storage.clear();});
-    core.byId("verify").onclick = function () {
+    //监听回车键点击事件
+    window.onkeydown = function (e) {if (13 === e.keyCode) submitMsg();}
+    //监听登陆事件
+    core.byId("verify").onclick = submitMsg;
+    function submitMsg() {
         //获取表单信息并使用别名
         var args = core.dataByIds(["account","username"],["passwd","password"]);
         //判断表单验证
