@@ -37,7 +37,7 @@
     border-radius: 3px;
 }
 #bg>section{
-    padding: 11px 11px 32px 11px;
+    padding: 11px;
     height: calc(100% - 101px);
 }
 #bg>section>.left,#bg>section>.right{
@@ -46,6 +46,7 @@
     height: 100%;
 }
 #bg>section>aside{width: 232px;}
+/* 宽度响应式布局 */
 @media screen and (max-width:1920px) {
     #bg{width: 1920px;}
     #bg>section>.right{width: 1652px;}
