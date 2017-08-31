@@ -1,6 +1,6 @@
 /* 初始化样式 */
-body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,input,textarea,select,div,
-header,section,label,iframe,aside{
+body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dt,dd,input,textarea,select,div,
+header,section,label,iframe,aside,nav{
     margin:0;padding:0;
 }
 body{
@@ -22,4 +22,3 @@ input[type=button],input[type=submit],input[type=reset],button{outline: none;bor
 .clearfix::before, .clearfix::after{
     content: "";height: 0;line-height: 0;display: block;visibility: hidden;clear: both;
 }
-.bgc{background:rgba(255, 205, 65, 0.4);}
