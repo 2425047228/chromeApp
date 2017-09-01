@@ -28,8 +28,17 @@
              }
          }
      });
+     
      core.byId("logout").onclick = function () {
          //退出处理
      }
-     core.iframeRedirectListener();    //监听跳转
+     //监听跳转
+     core.iframeRedirectListener(function (node,nodeList) {
+         if (!node.classList.contains("chosen-nav")) {
+             core.nodesExec(nodeList,function (value) {
+                 if (value.classList.contains("chosen-nav")) value.classList.remove("chosen-nav");
+             });
+             node.classList.add("chosen-nav");
+         }
+     });
  }

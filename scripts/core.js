@@ -15,7 +15,7 @@
         xhr:new XMLHttpRequest(),    //创建ajax对象
         storage:chrome.storage.local,    //需在manifest中注册storage权限
         byId:function (id) {return document.getElementById(id);},    //获取指定id节点
-        byClass:function (className) {return document.getElementsByClassName(className);},
+        byClass:function (className) {return document.querySelectorAll('.' + className)},
         byTagName:function (tagName) {return document.getElementsByTagName(tagName);},
         show:function (node) {node.setAttribute("style","display:block");},
         hide:function (node) {node.setAttribute("style","display:none");},
@@ -166,7 +166,7 @@
     c.windowById = function (id) {return chrome.app.window.get(id);}
     /********************************iframe操作*******************************/
     //iframe 点击加载iframe页面事件监听    class="redirect"    data-url="跳转地址"
-    c.iframeRedirectListener = function() {
+    c.iframeRedirectListener = function(callback) {
         var nodes = this.byClass("redirect");
         if ("object" !== typeof nodes) return false;
         var len = nodes.length;
@@ -176,7 +176,8 @@
             for (var i = 0;i < len;++i) {
                 nodes[i].onclick = function () {
                     url = this.getAttribute("data-url");
-                    if (url.length > 1) iframe.src = url;
+                    if (url !== null && url.length > 1) iframe.src = url;
+                    typeof callback === "function" && callback(this,nodes);
                 }
             }
         }
