@@ -17,6 +17,7 @@
         byId:function (id) {return document.getElementById(id);},    //获取指定id节点
         byClass:function (className) {return document.querySelectorAll('.' + className)},
         byTagName:function (tagName) {return document.getElementsByTagName(tagName);},
+        iframe:function () {return this.byTagName("iframe")[0];},
         show:function (node) {node.setAttribute("style","display:block");},
         hide:function (node) {node.setAttribute("style","display:none");},
         formValidator:new formValidator(),    //表单验证器
@@ -172,7 +173,7 @@
         var len = nodes.length;
         if (len > 0) {
             var url = null;
-            var iframe = this.byTagName("iframe")[0];
+            var iframe = this.iframe();
             for (var i = 0;i < len;++i) {
                 nodes[i].onclick = function () {
                     url = this.getAttribute("data-url");
@@ -182,6 +183,7 @@
             }
         }
     }
+
     /***************************网络请求操作*****************************/
     /**
     * get方式发送http请求
@@ -231,6 +233,24 @@
             param += k+'='+encodeURIComponent(obj[k])+'&';
         }
         return param;
+    }
+
+    /**
+     * 参数字符串转对象
+     * @param string 参数字符串
+     * @return object
+     */
+    c.paramToObject = function (string) {
+        var paramArr = string.split('&');
+        var len = paramArr.length;
+        var obj = {};
+        if (len < 1) return obj;
+        var tempArr = null;
+        for (var i = 0;i < len;++i) {
+            tempArr = paramArr[i].split('=');
+            obj[tempArr[0]] = tempArr[1];
+        }
+        return obj;
     }
 
     /**

@@ -2,10 +2,35 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../css/init.css">
+    <style>
+        body{
+            padding: 38px 0 0 40px;
+        }
+        body>section{
+            height: 306px;
+            background: grey;
+            border-radius: 5px;
+            width: 60%;
+        }
+        body>div{
+            margin-top: 40px;
+        }
+        body>div>span:nth-of-type(1),body>div>span:nth-of-type(3){font-size: 18px;}
+        body>div>span:nth-of-type(2){font-size: 24px;}
+    </style>
 </head>
 <body>
-    <h1>这是index页面</h1>
-    <hr>
-    <h2 style="color:aqua;">hello</h2>
+<section></section>
+<div>
+    <span>今日营业总额：</span>
+    <span id="int">0</span><span id="float">.00</span>
+</div>
+<div>
+    <span>今日有效订单：</span>
+    <span id="order">0</span>
+</div>
+<script src="../../scripts/core.js"></script>
+<script src="../../scripts/index/index.js"></script>
 </body>
 </html>
