@@ -2,20 +2,43 @@
  window.onload = function () {
      //判断是否来自登录界面跳转
      if (-1 !== location.search.substr(1).indexOf("from=login")) {core.close("login");}
+     //发送数据请求
+     core.storage.get("token",function (result) {
+         core.post(api.getUrl("index"),{token:result.token},function (response) {
+             var dataObj = core.jsonParse(response);
+             if (!core.apiVerify(dataObj)) return false;
+             var data = dataObj.data;
+             core.byId("merchant").innerText = data.mname;    //填充商家名称
+             statusSwitchover(1==data.state);    //根据店铺状态切换样式
+             //切换店铺状态操作
+             core.byId("switch").onclick = function () {
+                 var state = 1;
+                 if (this.src.indexOf("open") !== -1) {
+                     state = 3;
+                     statusSwitchover(false);
+                 } else  {
+                     statusSwitchover(true);
+                 }
+                 core.post(api.getUrl("statusSwitchover"),{token:result.token,state:state});
+             }
+             // var img = document.createElement("img");
+             // img.src = api.getHost()+data.circle_logo;
+             // core.byId("logo").appendChild(img);
+             //console.log('############################');
+             //console.log(chrome.fileSystem);
+             //console.log(chrome);
+             // chrome.fileSystem.chooseEntry({type:"openFile"}, function (fileEntry) {
+             //     console.log(fileEntry);
+             // });
+             console.log(dataObj);
+         });
+     });
      //隐藏或显示导航栏操作
      var optionTitles = core.byTagName("dt");
      core.nodesExec(optionTitles,function (node,i) {
          var option = core.byTagName("dd")[i];
          option.setAttribute("style","display:none;");
          node.onclick = function () {
-             core.storage.get("token",function (result) {
-                 console.log(result);
-                 core.post(api.getUrl("index"),{token:"94e3fZjAH25X2p4qCeHsuR1lTgrL3I9ztJ7Q0FGmm2jW+DALw9CiWu0"},function (response) {
-                     //"94e3fZjAH25X2p4qCeHsuR1lTgrL3I9ztJ7Q0FGmm2jW DALw9CiWu0"
-                     var data = core.jsonParse(response);
-                     console.log(data);
-                 });
-             });
              var tagNode = core.findBycClass(node,"right");
              var display = option.style.display;
              if (
@@ -51,4 +74,10 @@
              node.classList.add("chosen-nav");
          }
      });
+
+     //商家状态切换
+     function statusSwitchover(state) {
+         core.byId("switch").src = state ? "../images/open.png" : "../images/closed.png";
+         core.byId("state").innerText = state ? "正在营业" : "暂停营业";
+     }
  }

@@ -65,7 +65,8 @@
     height: 202px;
     background: #a7efef;
 }
-#bg>section>.left>div>header{height: 88px;width: 88px;  background: #09b1b0;margin:0 auto 18px;}
+#logo{height: 88px;width: 88px;margin:0 auto 18px;}
+#logo>img{height: 100%;width: 100%;}
 
 #bg>section>.left>div>#merchant{
     text-align: center;
