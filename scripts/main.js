@@ -28,7 +28,7 @@
              }
          }
      });
-     
+     //core.post();
      core.byId("logout").onclick = function () {
          //退出处理
      }
