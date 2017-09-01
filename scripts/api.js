@@ -9,6 +9,7 @@
         //host:"http://clean.shuxier.com",    //生产环境域名
         host:"http://xiyi.wzj.dev.shuxier.com/",    //测试环境域名
         login:"app.php/Home/Login/login",    //登陆uri
+        index:"app.php/Home/Merchant/index"    //首页接口
     };
     /**
      * 获取指定成员属性的url

@@ -223,11 +223,12 @@
     * @param obj 对象参数
     * @return string 参数字符串
     */ 
-    c.toParamString = function (obj) {
+     c.toParamString = function (obj) {
         if (typeof obj !== "object") return obj;
         var param = '';
         for (var k in obj) {
-            param += k+'='+obj[k]+'&';
+            //使用encodeURIComponent将参数值中的特殊字符进行转义防止ajax发送请求时缺省掉特殊字符
+            param += k+'='+encodeURIComponent(obj[k])+'&';
         }
         return param;
     }

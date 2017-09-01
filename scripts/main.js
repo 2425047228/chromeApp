@@ -8,6 +8,14 @@
          var option = core.byTagName("dd")[i];
          option.setAttribute("style","display:none;");
          node.onclick = function () {
+             core.storage.get("token",function (result) {
+                 console.log(result);
+                 core.post(api.getUrl("index"),{token:"94e3fZjAH25X2p4qCeHsuR1lTgrL3I9ztJ7Q0FGmm2jW+DALw9CiWu0"},function (response) {
+                     //"94e3fZjAH25X2p4qCeHsuR1lTgrL3I9ztJ7Q0FGmm2jW DALw9CiWu0"
+                     var data = core.jsonParse(response);
+                     console.log(data);
+                 });
+             });
              var tagNode = core.findBycClass(node,"right");
              var display = option.style.display;
              if (
@@ -28,7 +36,9 @@
              }
          }
      });
-     //core.post();
+
+
+
      core.byId("logout").onclick = function () {
          //退出处理
      }
