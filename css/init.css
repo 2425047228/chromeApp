@@ -22,3 +22,5 @@ input[type=button],input[type=submit],input[type=reset],button{outline: none;bor
 .clearfix::before, .clearfix::after{
     content: "";height: 0;line-height: 0;display: block;visibility: hidden;clear: both;
 }
+.hide{display: none}    /*隐藏*/
+.show{display: block}    /*显示*/

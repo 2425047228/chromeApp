@@ -17,9 +17,38 @@
         byId:function (id) {return document.getElementById(id);},    //获取指定id节点
         byClass:function (className) {return document.getElementsByClassName(className);},
         byTagName:function (tagName) {return document.getElementsByTagName(tagName);},
+        show:function (node) {node.setAttribute("style","display:block");},
+        hide:function (node) {node.setAttribute("style","display:none");},
         formValidator:new formValidator(),    //表单验证器
         validatorSwitch:true    //表单验证器开关，默认开启
     };
+    /**
+     *多节点操作封装函数
+     * @param nodes 节点数组
+     * @param exec 回调函数
+     */
+    c.nodesExec = function (nodes,exec) {
+        var len = nodes.length;
+        if (len > 1) {
+            for (var i = 0;i < len;++i) {typeof exec === "function" && exec(nodes[i],i);}
+        }
+    }
+
+    /**
+     * 节点中寻找指定class的子节点
+     * @param node 指定节点
+     * @param className class名称
+     * @return boolean 找寻到的节点
+     */
+    c.findBycClass = function (node,className) {
+        var children = node.childNodes;
+        var name = null;
+        for (var index in children) {
+            name = children[index].className;
+            if (typeof name !== "undefined" &&  name.indexOf(className) !== -1) return children[index];
+        }
+        return false;
+    }
 
     /******************************表单操作***********************************/
     /**
