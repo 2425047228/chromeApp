@@ -224,12 +224,14 @@
      * @param url resource链接地址
      * @param imgNode tag节点
      */
-    c.getImage = function (url,imgNode) {
+    c.getImage = function (url,imgNode,callback) {
         var xhr = new XMLHttpRequest();
         xhr.open("GET",url,true);
         xhr.responseType = "blob";    //声明响应类型为二进制
         xhr.onload = function () {
-            imgNode.src = window.URL.createObjectURL(this.response);    //chromeURL对象类，仅限于app扩展使用
+            var url = window.URL.createObjectURL(this.response);    //chromeURL对象类，仅限于app扩展使用
+            imgNode.src = url;
+            typeof callback === "function" && callback(this.response);
         }
         xhr.send();
     }

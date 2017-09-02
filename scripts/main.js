@@ -24,16 +24,6 @@
                  }
                  core.post(api.getUrl("statusSwitchover"),{token:result.token,state:state});
              }
-             // var img = document.createElement("img");
-             // img.src = api.getHost()+data.circle_logo;
-             // core.byId("logo").appendChild(img);
-             //console.log('############################');
-             //console.log(chrome.fileSystem);
-             //console.log(chrome);
-             // chrome.fileSystem.chooseEntry({type:"openFile"}, function (fileEntry) {
-             //     console.log(fileEntry);
-             // });
-             console.log(dataObj);
          });
      });
      //隐藏或显示导航栏操作
@@ -83,5 +73,4 @@
          core.byId("switch").src = state ? "../images/open.png" : "../images/closed.png";
          core.byId("state").innerText = state ? "正在营业" : "暂停营业";
      }
-
  }
