@@ -171,11 +171,10 @@
         if ("object" !== typeof nodes) return false;
         var len = nodes.length;
         if (len > 0) {
-            var url = null;
             var iframe = this.iframe();
             for (var i = 0;i < len;++i) {
                 nodes[i].onclick = function () {
-                    url = this.getAttribute("data-url");
+                    var url = this.getAttribute("data-url");
                     if (url !== null && url.length > 1) iframe.src = url;
                     typeof callback === "function" && callback(this,nodes);
                 }

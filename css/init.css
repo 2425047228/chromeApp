@@ -14,13 +14,13 @@ li{list-style:none}
 img{border:0;vertical-align:middle} 
 table{border-collapse:collapse;border-spacing:0} 
 p{word-wrap:break-word} 
-input[type=button],input[type=submit],input[type=reset],button{outline: none;border:0;}
+input,button{outline: none;}
 /* 公共css样式部分 */
 .drag{-webkit-app-region: drag;}    /*允许拉拽拖动*/
 .right{float: right;}
 .left{float: left;}
 .clearfix::before, .clearfix::after{
-    content: "";height: 0;line-height: 0;display: block;visibility: hidden;clear: both;
+    content: "";height: 0;line-height: 0;display: block;visibility: hidden;clear: both;overflow: hidden;
 }
 .hide{display: none}    /*隐藏*/
 .show{display: block}    /*显示*/
