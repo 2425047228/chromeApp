@@ -1,5 +1,5 @@
 /**
- * 接口数据函数封装
+ * 接口数据函数对象封装
  * @author yangyunlog
  */
 (function(window){
