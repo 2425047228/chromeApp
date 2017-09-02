@@ -50,6 +50,11 @@ iframe{overflow: auto;}
     border: 2px solid #038281;
     height: 100%;
 }
+/*主体右侧宽度*/
+#bg>section>.right{width: calc(100% - 241px)}
+/*主体左侧宽度*/
+#bg>section>.left{width: 232px;}
+
 /*线上订单*/
 #order>.left{background-image: url(../images/order.png);}
 /*线下收银*/
@@ -63,7 +68,6 @@ iframe{overflow: auto;}
 /*选单收缩*/
 .shrink{background-image: url(../images/2.png);}
 /***************************************************************1920 * 1080 宽度布局*/
-#bg>section>.left{width: 232px;}
 /*主体左侧顶部展示*/
 #bg>section>.left>div{
     padding-top: 26px;
@@ -131,8 +135,6 @@ iframe{overflow: auto;}
     padding: 0 8px 0;
     border-radius: 50px;
 }
-/*主体右侧宽度*/
-#bg>section>.right{width: calc(100% - 241px)}
 
 /******************************************************************1920 * 1080 宽度布局*/
 /* 宽度响应式布局 */
