@@ -23,6 +23,7 @@
         //"system.storage"    //存储信息
     ],
     "app": {
+        "downloads":true,
         "background": {
             "scripts": ["./scripts/background.js"]    //packaged app 事件监听脚本
         },

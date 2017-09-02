@@ -12,7 +12,6 @@
         }
     }
     var c = {
-        xhr:new XMLHttpRequest(),    //创建ajax对象
         storage:chrome.storage.local,    //需在manifest中注册storage权限
         byId:function (id) {return document.getElementById(id);},    //获取指定id节点
         byClass:function (className) {return document.querySelectorAll('.' + className)},
@@ -191,14 +190,14 @@
     * @param callback 回调函数
     */
     c.get = function(url, callback) {
-        var xmlHttp = this.xhr;
-        xmlHttp.open("GET", url, true);
-        xmlHttp.onreadystatechange = function() {
-            if (xmlHttp.readyState == 4) {
-                typeof callback === "function" && callback(xmlHttp.responseText);
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", url, true);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4) {
+                typeof callback === "function" && callback(xhr.responseText);
             }
         }
-        xmlHttp.send();
+        xhr.send();
     }
 
     /**
@@ -208,16 +207,31 @@
     * @param callback 回调函数
     */
     c.post = function(url, args, callback) {
-        var xmlHttp = this.xhr;
+        var xhr = new XMLHttpRequest();
         if (typeof args === "object") args = this.toParamString(args);
-        xmlHttp.open("POST", url, true);
-        xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-        xmlHttp.onreadystatechange = function() {
-            if (4 == xmlHttp.readyState) {
-                typeof callback === "function" && callback(xmlHttp.responseText);
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+            if (4 == xhr.readyState) {
+                typeof callback === "function" && callback(xhr.responseText);
             }
         }
-        xmlHttp.send(args);
+        xhr.send(args);
+    }
+
+    /**
+     * chrome只允许使用本地资源，网络资源只能以chrome封装的方式请求，封装请求图片方法
+     * @param url resource链接地址
+     * @param imgNode tag节点
+     */
+    c.getImage = function (url,imgNode) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET",url,true);
+        xhr.responseType = "blob";    //声明响应类型为二进制
+        xhr.onload = function () {
+            imgNode.src = window.URL.createObjectURL(this.response);    //chromeURL对象类，仅限于app扩展使用
+        }
+        xhr.send();
     }
 
    /**

@@ -1,6 +1,5 @@
 "use strict"
  window.onload = function () {
-     console.log(chrome);
      //判断是否来自登录界面跳转
      if (-1 !== location.search.substr(1).indexOf("from=login")) {core.close("login");}
      //发送数据请求
@@ -10,6 +9,7 @@
              if (!core.apiVerify(dataObj)) return false;
              var data = dataObj.data;
              core.byId("merchant").innerText = data.mname;    //填充商家名称
+             core.getImage(api.getHost()+data.circle_logo,core.byId("avatar"));    //填充商家头像
              statusSwitchover(1==data.state);    //根据店铺状态切换样式
              //将营业额及订单总数传递给index页面
              core.iframe().src = "./index/index.html?amount="+data.total+"&order="+data.order_count;
