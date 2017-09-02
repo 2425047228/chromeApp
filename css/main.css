@@ -1,4 +1,5 @@
 @import "screen.css";
+/*整体背景色*/
 #bg{background: #09b1b0;}
 iframe{overflow: auto;}
 #bg>header,#logout,
@@ -6,6 +7,7 @@ iframe{overflow: auto;}
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
 }
+/*界面顶部*/
 #bg>header{
     background: url(../images/header-bg.png) no-repeat 0 0;
     width: 100%;
@@ -13,12 +15,14 @@ iframe{overflow: auto;}
     background-size: 100% 100%;
 }
 #bg>header>.left,#bg>header>.right{color: rgb(255, 255, 255);line-height: 101px;}
+/*界面顶部左侧*/
 #bg>header>.left{
     font-size: 32px;
     font-weight: bold;
     height: 100px;
     padding-left: 28px;
 }
+/*界面顶部右侧*/
 #bg>header>.right{padding-right: 26px;}
 #bg>header>.right>span{
     margin-right: 50px;padding-left: 34px;padding-top: 6px;
@@ -36,6 +40,7 @@ iframe{overflow: auto;}
     color: rgb(255, 255, 255);
     width: 71px;height: 34px;
 }
+/*界面主体*/
 #bg>section{
     padding: 11px;
     height: calc(100% - 101px);
@@ -59,8 +64,8 @@ iframe{overflow: auto;}
 .shrink{background-image: url(../images/2.png);}
 /***************************************************************1920 * 1080 宽度布局*/
 #bg>section>.left{width: 232px;}
-/*顶部展示*/
-#bg>section>aside>div{
+/*主体左侧顶部展示*/
+#bg>section>.left>div{
     padding-top: 26px;
     width: 100%;
     height: 202px;
@@ -81,7 +86,7 @@ iframe{overflow: auto;}
     color: #ff6f43;
     vertical-align: middle;
 }
-/*底部导航*/
+/*主体左侧底部导航*/
 #bg>section>.left>dl{
     height: calc(100% - 228px);
     background: #f0fefe;
@@ -126,10 +131,11 @@ iframe{overflow: auto;}
     padding: 0 8px 0;
     border-radius: 50px;
 }
+/*主体右侧宽度*/
+#bg>section>.right{width: calc(100% - 241px)}
 
 /******************************************************************1920 * 1080 宽度布局*/
 /* 宽度响应式布局 */
-#bg>section>.right{width: calc(100% - 268px)}
 /*@media screen and (max-width:1920px) {    !*1920 * 1080*!*/
     /*#bg{width: 1920px;}*/
     /*#bg>section>.right{width: 1652px;}*/
