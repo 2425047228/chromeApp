@@ -129,27 +129,28 @@ iframe{overflow: auto;}
 
 /******************************************************************1920 * 1080 宽度布局*/
 /* 宽度响应式布局 */
-@media screen and (max-width:1920px) {    /*1920 * 1080*/
-    #bg{width: 1920px;}
-    #bg>section>.right{width: 1652px;}
-}
-@media screen and (max-width:1600px) {    /*1600 * 900*/
-    #bg{width: 1600px;}
-    #bg>section>.right{width: 1335px;}
-}
-@media screen and (max-width:1540px) {    /*1920 * 1080*/
-    #bg{width: 1540px;}
-    #bg>section>.right{width: 1275px;}
-}
-@media screen and (max-width:1440px) {    /*1440 * 900*/
-    #bg{width: 1440px;}
-    #bg>section>.right{width: 1175px;}
-}
-@media screen and (max-width:1336px) {    /*1366 * 768*/
-    #bg{width: 1336px;}
-    #bg>section>.right{width: 1071px;}
-}
-@media screen and (max-width:1024px) {    /*1024 * 600*/
-    #bg{width: 1024px;}
-    #bg>section>.right{width: 759px;}
-}
+#bg>section>.right{width: calc(100% - 268px)}
+/*@media screen and (max-width:1920px) {    !*1920 * 1080*!*/
+    /*#bg{width: 1920px;}*/
+    /*#bg>section>.right{width: 1652px;}*/
+/*}*/
+/*@media screen and (max-width:1600px) {    !*1600 * 900*!*/
+    /*#bg{width: 1600px;}*/
+    /*#bg>section>.right{width: 1335px;}*/
+/*}*/
+/*@media screen and (max-width:1540px) {    !*1920 * 1080*!*/
+    /*#bg{width: 1540px;}*/
+    /*#bg>section>.right{width: 1275px;}*/
+/*}*/
+/*@media screen and (max-width:1440px) {    !*1440 * 900*!*/
+    /*#bg{width: 1440px;}*/
+    /*#bg>section>.right{width: 1175px;}*/
+/*}*/
+/*@media screen and (max-width:1336px) {    !*1366 * 768*!*/
+    /*#bg{width: 1336px;}*/
+    /*#bg>section>.right{width: 1071px;}*/
+/*}*/
+/*@media screen and (max-width:1024px) {    !*1024 * 600*!*/
+    /*#bg{width: 1024px;}*/
+    /*#bg>section>.right{width: 759px;}*/
+/*}*/
