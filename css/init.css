@@ -14,7 +14,7 @@ li{list-style:none}
 img{border:0;vertical-align:middle} 
 table{border-collapse:collapse;border-spacing:0} 
 p{word-wrap:break-word} 
-input,button{outline: none;}
+input,button{outline: none;border:none;}
 /* 公共css样式部分 */
 .drag{-webkit-app-region: drag;}    /*允许拉拽拖动*/
 .right{float: right;}

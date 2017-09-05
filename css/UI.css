@@ -1,4 +1,5 @@
-.search,table,th,td,.btn{
+.search,table,th,td,.btn,
+.checkbox,.checkbox>.checkbox-title,.checkbox>.checkbox-body{
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
 }
@@ -62,7 +63,67 @@ input,button{border: none;outline: none;-webkit-appearance: none;}
     padding: 0 10px;
 }
 .btn-cancel{border:1px solid #b2b2b2;background: #ffffff;}    /*取消按钮样式*/
-.btn-confirm{background: #09b1b0;color: #ffffff}
+.btn-confirm{background: #09b1b0;color: #ffffff}    /*确认按钮样式*/
+.btn-larger-confirm{
+    padding: 10px 82px;
+    font-size: 20px;
+    color: #ffffff;
+    background: #09b1b0;
+    height: auto;
+}
+/*浮层弹框背景样式*/
+.alert-bg{
+    background: rgba(153,153,153,0.5);
+    position: fixed;
+    top: 0;left: 0;
+    width: 100%;
+    height: 100%;
+}
+/*多选弹框样式*/
+.checkbox{
+    width: 409px;
+    background: #ffffff;
+    border-radius: 5px;
+    padding:0 10px 32px;
+}
+.checkbox>.checkbox-title{
+    position: relative;
+    height: 62px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 20px;
+    color: #333333;
+    vertical-align: middle;
+    line-height:62px;
+    text-align: center;
+}
+.checkbox>.checkbox-title>.checkbox-cancel{
+    display: inline-block;
+    height: 100%;
+    width: 30px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: url(../images/checkbox-cancel.png) no-repeat center;
+}
+.checkbox>.checkbox-body{
+    width: 100%;
+    padding: 33px 36px 0;
+    text-align: center;
+}
+.checkbox>.checkbox-body>input[type=button],.checkbox>.checkbox-body>button{
+    margin-top: 20px;
+}
+/*未选中效果*/
+.checkbox>.checkbox-body>.checkbox-option{
+    line-height: 19px;
+    font-size: 16px;
+    padding-left: 28px;
+    text-align: left;
+    margin-bottom: 22px;
+    background: url(../images/checkbox.png) no-repeat center left;
+}
+/*已选中效果*/
+.checkbox>.checkbox-body>.checked{background: url(../images/checked.png) no-repeat center left;}
 
 /*普通表格样式*/
 .table-normal{

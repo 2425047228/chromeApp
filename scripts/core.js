@@ -129,10 +129,11 @@
         window.setTimeout(function(){body.removeChild(node);},3000);
     }
 
-    c.getCenterPosition = function(width,height) {
+    c.getCenterPosition = function(width,height,parent) {
+        if (typeof parent === "undefined") parent = document.body;
         return {
-            left:(document.body.offsetWidth-width)/2,
-            top:(document.body.offsetHeight-height)/2
+            left:(parent.offsetWidth-width)/2,
+            top:(parent.offsetHeight-height)/2
         }
     }
 

@@ -10,7 +10,9 @@
         host:"http://xiyi.wzj.dev.shuxier.com",    //测试环境域名
         login:"/app.php/Home/Login/login",    //登陆uri
         index:"/app.php/Home/Merchant/index",    //首页接口
-        statusSwitchover:"/app.php/Home/Merchant/state_change"    //店铺状态切换 1-营业中 3-休息中
+        statusSwitchover:"/app.php/Home/Merchant/state_change",    //店铺状态切换 1-营业中 3-休息中
+        orderHandle:"/app.php/Home/Merchant/orderHandle",    //订单处理接口 state:0-待处理;1-代取;2-待清洗;3-清洗中;4-代送达
+        orderCancel:"/app.php/Home/Merchant/cause"    //取消订单接口
     };
     /**
      * 获取指定成员属性的url

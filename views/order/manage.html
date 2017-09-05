@@ -19,6 +19,7 @@
 <!--table区域-->
 <section class="container">
     <table class="table-normal">
+        <thead>
         <tr>
             <th>订单号</th>
             <th>预约上门时间</th>
@@ -28,7 +29,9 @@
             <th>时间</th>
             <th>处理</th>
         </tr>
-        <tr>
+        </thead>
+        <tbody>
+        <!--<tr>
             <td>999999999999999999</td>
             <td>9999-99-99 22:22~22:22</td>
             <td>李默哦</td>
@@ -39,10 +42,25 @@
                 <input type="button" class="btn btn-cancel" value="取消订单">
                 <input type="button" class="btn btn-confirm" value="确认订单">
             </td>
-        </tr>
-
+        </tr>-->
+        </tbody>
     </table>
+
+    <!--<div class="alert-bg">
+        <section class="checkbox">
+            <header class="checkbox-title">取消订单原因<i class="checkbox-cancel"></i></header>
+            <div class="checkbox-body">
+                <div class="checkbox-option checked">商家暂不接单</div>
+                <div class="checkbox-option">超出服务范围</div>
+                <div class="checkbox-option">无法提供客户所选服务</div>
+                <div class="checkbox-option">距离太远</div>
+                <div class="checkbox-option">其他原因</div>
+                <input type="button" value="取消订单" class="btn btn-larger-confirm">
+            </div>
+        </section>
+    </div>-->
 </section>
+<script src="../../scripts/api.js"></script>
 <script src="../../scripts/core.js"></script>
 <script src="../../scripts/UI.js"></script>
 <script src="../../scripts/order/manage.js"></script>
