@@ -139,6 +139,7 @@ input,button{border: none;outline: none;-webkit-appearance: none;}
     background: #eef8ff;
     font-weight:normal;
 }
+.table-normal .red{color: red;}
 .table-normal td{
     text-align: left;
     padding-left: 12px;

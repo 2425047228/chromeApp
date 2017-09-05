@@ -1,8 +1,9 @@
+
 window.onload = function () {
     var willDispose = new willDispose();
     var orderList;
     core.storage.get('token',function (result) {
-        core.post(api.getUrl('orderHandle'),{token:result.token,state:0,page:1,limit:10000},function (json) {
+        core.post(api.getUrl('orderHandle'),{token:result.token,state:1,page:1,limit:10000},function (json) {
             var jsonData = core.jsonParse(json);
             orderList = jsonData.data;
             willDispose.list(orderList);
@@ -13,7 +14,7 @@ window.onload = function () {
         ['订单处理', '#']
     ]);
     UI.tabChange('tab','tab-chosen',function (tab) {
-        if (tab.innerText != '待处理') {
+        if (tab.innerText != '待收件') {
             return location.href = tab.dataset.url;
         }
     })
@@ -44,7 +45,7 @@ window.onload = function () {
                 content += '<td>' +data[i].create_time+ '</td>';
                 content += '<td data-id="' +data[i].id+ '">' +
                     '<input type="button" class="btn btn-cancel" value="取消订单">' +
-                    '&emsp;<input type="button" class="btn btn-confirm" value="确认订单">';
+                    '&emsp;<input type="button" class="btn btn-confirm" value="添加项目">';
                 content += '</td></tr>';
             }
             core.byTagName('tbody')[0].innerHTML = content;
@@ -78,10 +79,10 @@ window.onload = function () {
 
                     }
                     if (this.classList.contains('btn-confirm')) {
-                        core.post(api.getUrl('orderHandle'),{token:token,state:0,id:id},function (json) {
+                        /*core.post(api.getUrl('orderHandle'),{token:token,state:0,id:id},function (json) {
                             var jsonData = core.jsonParse(json);
                             return location.reload();
-                        })
+                        })*/
                     }
                 }
             }

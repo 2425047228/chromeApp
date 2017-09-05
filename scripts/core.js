@@ -22,6 +22,9 @@
         formValidator:new formValidator(),    //表单验证器
         validatorSwitch:true    //表单验证器开关，默认开启
     };
+    String.prototype.trim = function () {
+        return this.replace(/(^\s*)|(\s*$)/g,'');
+    }
     /**
      *多节点操作封装函数
      * @param nodes 节点数组
