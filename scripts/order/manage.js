@@ -22,9 +22,13 @@ window.onload = function () {
         var searchValue = core.byId('search_value').value.trim();
         if (searchValue == '') return false;
         willDispose.list(orderList,function (ordersn) {
-            if (ordersn != searchValue) return false;
+            if (ordersn.indexOf(searchValue) === -1) return false;
             return true;
         });
+        core.storage.get('token',function (result) {
+            willDispose.bindClick(result.token);
+        });
+
     }
 
     //待处理数据

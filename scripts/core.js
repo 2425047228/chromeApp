@@ -25,6 +25,12 @@
     String.prototype.trim = function () {
         return this.replace(/(^\s*)|(\s*$)/g,'');
     }
+    Array.prototype.limit = function (index,length) {
+        var len = this.length;
+        var start = index + 1;
+        if (len < start) return [];    //判断开始索引是否超出当前数组长度
+        var end = index+length;
+    }
     /**
      *多节点操作封装函数
      * @param nodes 节点数组
@@ -260,6 +266,8 @@
      * @return object
      */
     c.paramToObject = function (string) {
+        //判断是否传入参数，传入则使用，不传入则使用当前url的参数
+        if (typeof string === "undefined") string = location.search.substr(1);
         var paramArr = string.split('&');
         var len = paramArr.length;
         var obj = {};

@@ -1,11 +1,17 @@
 .search,table,th,td,.btn,
-.checkbox,.checkbox>.checkbox-title,.checkbox>.checkbox-body{
+.checkbox,.checkbox>.checkbox-title,.checkbox>.checkbox-body,.table-checkbox tr>td:first-of-type>.option{
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
 }
 input,button{border: none;outline: none;-webkit-appearance: none;}
+.add,.subtract{display: inline-block;padding-left: 19px;height: 19px}
+/*添加图标样式*/
+.add{background: url(../images/add.png) no-repeat center left;}
+/*减少图标样式*/
+.subtract{background: url(../images/subtract.png) no-repeat center left;}
 /*容器样式*/
 .container{padding:18px 22px 0 16px;}
+.tiny-container{display: inline-block;height: 19px;padding: 0 18px;line-height: 19px;}
 /*面包屑样式*/
 #crumbs{
     color: #242424;
@@ -24,7 +30,7 @@ input,button{border: none;outline: none;-webkit-appearance: none;}
 .tab{
     display: inline-block;
     height: 40px;
-    width: 110px;
+    padding: 0 18px;
     background: #f1f1f1;
     color: #333333;
     font-size: 18px;
@@ -55,6 +61,7 @@ input,button{border: none;outline: none;-webkit-appearance: none;}
 }
 /*按钮样式*/
 .btn{
+    display: inline-block;
     border-radius: 5px;
     height: 27px;
     font-size: 14px;
@@ -64,12 +71,24 @@ input,button{border: none;outline: none;-webkit-appearance: none;}
 }
 .btn-cancel{border:1px solid #b2b2b2;background: #ffffff;}    /*取消按钮样式*/
 .btn-confirm{background: #09b1b0;color: #ffffff}    /*确认按钮样式*/
+/*大型号确认按钮*/
 .btn-larger-confirm{
     padding: 10px 82px;
     font-size: 20px;
     color: #ffffff;
     background: #09b1b0;
     height: auto;
+}
+/*标签按钮*/
+.tab-btn{
+    display: inline-block;
+    height: 42px;
+    padding: 0 18px;
+    font-size: 18px;
+    line-height: 42px;
+    text-align: center;
+    color: #ffffff;
+    background: #02bfbe;
 }
 /*浮层弹框背景样式*/
 .alert-bg{
@@ -126,7 +145,7 @@ input,button{border: none;outline: none;-webkit-appearance: none;}
 .checkbox>.checkbox-body>.checked{background: url(../images/checked.png) no-repeat center left;}
 
 /*普通表格样式*/
-.table-normal{
+.table-normal,.table-checkbox{
     border:1px solid #b2b2b2;
     width: 100%;
 }
@@ -145,4 +164,33 @@ input,button{border: none;outline: none;-webkit-appearance: none;}
     padding-left: 12px;
     font-size: 14px;
     height: 50px;
+}
+/*无td边框线的表格*/
+.table-checkbox{
+    text-align: center;
+    font-size: 16px;
+    vertical-align: middle;
+    padding:0 100px 0 24px;
+}
+.table-checkbox th{
+    border-bottom: 1px solid #b2b2b2;
+    font-weight: normal;
+    padding: 10px 0;
+    background: #eef8ff;
+}
+.table-checkbox td{
+    padding: 8px 0;
+}
+.table-checkbox td img{
+    width: 60px;
+    height: 60px;
+}
+.table-checkbox tr>td:first-of-type>.option{
+    display: inline-block;
+    height: 100%;
+    padding-left: 38px;
+    background: url(../images/checkbox.png) no-repeat center left;
+}
+.table-checkbox tr>td:first-of-type>.checked{
+    background: url(../images/checked.png) no-repeat center left;
 }

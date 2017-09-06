@@ -23,8 +23,11 @@ window.onload = function () {
         var searchValue = core.byId('search_value').value.trim();
         if (searchValue == '') return false;
         willDispose.list(orderList,function (ordersn) {
-            if (ordersn != searchValue) return false;
+            if (ordersn.indexOf(searchValue) === -1) return false;
             return true;
+        });
+        core.storage.get('token',function (result) {
+            willDispose.bindClick(result.token);
         });
     }
 
@@ -79,10 +82,7 @@ window.onload = function () {
 
                     }
                     if (this.classList.contains('btn-confirm')) {
-                        /*core.post(api.getUrl('orderHandle'),{token:token,state:0,id:id},function (json) {
-                            var jsonData = core.jsonParse(json);
-                            return location.reload();
-                        })*/
+                        return location.href = './add.html?id='+id;
                     }
                 }
             }
