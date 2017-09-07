@@ -1,5 +1,7 @@
 .search,table,th,td,.btn,
-.checkbox,.checkbox>.checkbox-title,.checkbox>.checkbox-body,.table-checkbox tr>td:first-of-type>.option{
+.checkbox,.checkbox>.checkbox-title,.checkbox>.checkbox-body,
+.table-checkbox tr>td:first-of-type>.option,
+.page>*{
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
 }
@@ -158,7 +160,7 @@ input,button{border: none;outline: none;-webkit-appearance: none;}
     background: #eef8ff;
     font-weight:normal;
 }
-.table-normal .red{color: red;}
+.red{color: red;}
 .table-normal td{
     text-align: left;
     padding-left: 12px;
@@ -179,7 +181,7 @@ input,button{border: none;outline: none;-webkit-appearance: none;}
     background: #eef8ff;
 }
 .table-checkbox td{
-    padding: 8px 0;
+    padding: 21px 0;
 }
 .table-checkbox td img{
     width: 60px;
@@ -193,4 +195,24 @@ input,button{border: none;outline: none;-webkit-appearance: none;}
 }
 .table-checkbox tr>td:first-of-type>.checked{
     background: url(../images/checked.png) no-repeat center left;
+}
+/*分页样式效果*/
+.page{
+    height: 30px;
+    width: 100%;
+    text-align: center;
+}
+.page>*{
+    display: inline-block;
+    border:1px solid #e0e0e0;
+    background: #f5f5f5;
+    height: 30px;
+    padding: 0 12px;
+    line-height: 30px;
+    margin-right: 3px;
+}
+.page>.chosen{
+    border: 0;
+    background: 0;
+    color: red;
 }

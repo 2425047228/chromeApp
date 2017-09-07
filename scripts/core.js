@@ -2,7 +2,25 @@
  * 核心工具封装函数对象
  * @author yangyunlong
  */
+
 (function(window){
+    /****************************************js原型封装**********************************************/
+    String.prototype.trim = function () {
+        return this.replace(/(^\s*)|(\s*$)/g,'');
+    }
+    Array.prototype.limit = function (index,length) {
+        var len = this.length;
+        if (len < index + 1) return [];    //判断开始索引是否超出当前数组长度
+        var retArr = [];
+        var tempIndex;
+        for (var i = 0;i < length;++i) {
+            tempIndex = index+i;
+            if (typeof this[tempIndex] === "undefined") break;
+            retArr.push(this[tempIndex]);
+        }
+        return retArr;
+    };
+    /****************************************js原型封装**********************************************/
     var formValidator = function() {
         this.required = function(node){    //验证必填项方法
             if (node.getAttribute("required") !== null) {
@@ -22,15 +40,31 @@
         formValidator:new formValidator(),    //表单验证器
         validatorSwitch:true    //表单验证器开关，默认开启
     };
-    String.prototype.trim = function () {
-        return this.replace(/(^\s*)|(\s*$)/g,'');
-    }
-    Array.prototype.limit = function (index,length) {
+    /**
+     * 对获取的列表数组添加函数时间
+     * @param callback 绑定函数
+     */
+    c.byClass.__proto__.__proto__.bindClick = function (callback) {
         var len = this.length;
-        var start = index + 1;
-        if (len < start) return [];    //判断开始索引是否超出当前数组长度
-        var end = index+length;
+        if (typeof callback === "function") {
+            for (var i = 0;i < len;++i) {
+                this[i].onclick = callback;
+            }
+        }
     }
+    /**
+     * 分页函数数据获取
+     * @param page 页码
+     * @param number 每页记录数
+     * @return Array 分页数组
+     */
+    c.getPage = function (page,number) {
+        if (typeof number === "undefined") number = 7;
+        if (typeof page === "undefined") page = 1;
+        page = (page - 1) * number;
+        return [page,number];
+    }
+
     /**
      *多节点操作封装函数
      * @param nodes 节点数组
@@ -239,8 +273,8 @@
         xhr.responseType = "blob";    //声明响应类型为二进制
         xhr.onload = function () {
             var url = window.URL.createObjectURL(this.response);    //chromeURL对象类，仅限于app扩展使用
-            imgNode.src = url;
-            typeof callback === "function" && callback(this.response);
+            if (typeof imgNode !== "undefined" && imgNode !== null) imgNode.src = url;
+            typeof callback === "function" && callback(url,this.response);
         }
         xhr.send();
     }

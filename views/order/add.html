@@ -11,7 +11,10 @@
 <section class="container"></section>
 <section class="container clearfix">
     <section class="search"><input type="text" placeholder="请输入订单号" id="search_value"><input type="button" value="搜索" id="search"></section>
-    <input type="button" value="下一步，工艺加价" class="tab-btn right">
+    <input type="button" value="下一步，工艺加价" class="tab-btn right" id="next">
+    <div style="height: 42px;padding: 0 18px;display: inline-block;line-height: 42px;text-align: center;" class="right">
+        已选择<span class="red" style="margin: 0 3px;" id="total">0</span>件
+    </div>
 </section>
 <!--table区域-->
 <section class="container">
@@ -21,27 +24,14 @@
             <th>名称</th>
             <th>所属分类</th>
             <th>价格</th>
-            <th>图片展示</th>
             <th>件数</th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
-            <td><span class="option">羊毛背心(干洗)</span></td>
-            <td>9999-99-99 22:22~22:22</td>
-            <td>李默哦</td>
-            <td><img src="../../images/128.png"></td>
-            <td><em class="subtract"></em><span class="tiny-container">0</span><em class="add"></em></td>
-        </tr>
-        <tr>
-            <td><span class="option checked">羊毛背心(干洗)</span></td>
-            <td>9999-99-99 22:22~22:22</td>
-            <td>李默哦</td>
-            <td><img src="../../images/128.png"></td>
-            <td><em class="subtract"></em><span class="tiny-container">0</span><em class="add"></em></td>
-        </tr>
-        </tbody>
+        <tbody></tbody>
     </table>
+</section>
+<section class="container">
+    <div class="page"></div>
 </section>
 <script src="../../scripts/api.js"></script>
 <script src="../../scripts/core.js"></script>

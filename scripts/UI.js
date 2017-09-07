@@ -14,11 +14,11 @@
         if (len < 1) return false;
         if (typeof index === "undefined") index = '../index/index.html';
         var tag = '<em>&gt;</em>';
-        var content = '位置&nbsp;:<a href="'+index+'">首页</a>';
+        var html = '位置&nbsp;:<a href="'+index+'">首页</a>';
         for (var i = 0;i < len;++i) {
-            content += tag + '<a href="'+array[i][1]+'">'+array[i][0]+'</a>';
+            html += tag + '<a href="'+array[i][1]+'">'+array[i][0]+'</a>';
         }
-        core.byId('crumbs').innerHTML = content;
+        core.byId('crumbs').innerHTML = html;
     }
 
     /**
@@ -125,6 +125,50 @@
                 obj.callback(callbackParam);
             }
         }
+    };
+
+    /**
+     * 分页视图构建函数
+     * @param object maxPage = 最大页数; nowPage = 当前页数; showPageNumber = 展示显示页码数的条数
+     *
+     * */
+    u.createPageView = function (object) {
+        /*<div class="chosen">1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>下一页</div><div>尾页</div>*/
+        var page = core.byClass('page')[0];
+        if (
+            typeof object !== "object" ||
+            typeof object.maxPage === "undefined" ||
+            object.maxPage == 1
+        ) return page.innerHTML = '';
+        if (typeof object.nowPage === "undefined") object.nowPage = 1;
+        if (typeof object.showPageNumber === "undefined") object.showPageNumber = 10;
+        var html = '';
+        if (object.maxPage < object.showPageNumber) {    //如果当前总页数小于展示的页数则隐藏上一页等操作页
+            for (var i = 1;i <= object.maxPage;++i) {
+                html += i == object.nowPage ? '<div class="chosen">' : '<div>';
+                html += i + '</div>';
+            }
+        } else {    //多页码展示显示上一页的展示
+            /*var first,previous,next,last = '';
+            for (var i = 0;i < object.showPageNumber;++i) {
+
+            }*/
+        }
+
+        page.innerHTML = html;
+        var pageList = page.childNodes;
+        var pageListLen = pageList.length;
+        if (typeof object.callback === "function") {
+            for (var j = 0;j < pageListLen;++j) {
+                if (!pageList[j].classList.contains('chosen')) {
+                    pageList[j].onclick = function () {
+                        object.callback(this.innerText,this);
+                    }
+                }
+            }
+        }
+
+
     }
     window.UI = u;
 })(window);

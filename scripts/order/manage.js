@@ -1,4 +1,9 @@
 window.onload = function () {
+    //创建面包屑导航
+    UI.createCrumbs([['订单处理', '#']]);
+    //创建切换跳转
+    UI.tabChange('tab','tab-chosen',function (tab) {return location.href = tab.dataset.url;});
+
     var willDispose = new willDispose();
     var orderList;
     core.storage.get('token',function (result) {
@@ -8,14 +13,6 @@ window.onload = function () {
             willDispose.list(orderList);
             willDispose.bindClick(result.token);
         })
-    })
-    UI.createCrumbs([
-        ['订单处理', '#']
-    ]);
-    UI.tabChange('tab','tab-chosen',function (tab) {
-        if (tab.innerText != '待处理') {
-            return location.href = tab.dataset.url;
-        }
     })
     //搜索处理
     core.byId('search').onclick = function () {
