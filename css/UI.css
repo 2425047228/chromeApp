@@ -1,3 +1,4 @@
+body{max-height: calc(1080px - 114px);overflow: auto;}    /*超出屏幕出现滚动条*/
 .search,table,th,td,.btn,
 .checkbox,.checkbox>.checkbox-title,.checkbox>.checkbox-body,
 .table-checkbox tr>td:first-of-type>.option,
@@ -92,6 +93,14 @@ input,button{border: none;outline: none;-webkit-appearance: none;}
     color: #ffffff;
     background: #02bfbe;
 }
+.tab-small-btn{
+    height: 28px;
+    line-height: 28px;
+    padding: 0 10px;
+    font-size: 14px;
+    margin-top: 14px;
+}
+.tab-grey-btn{background: #a9a9a9;}
 /*浮层弹框背景样式*/
 .alert-bg{
     background: rgba(153,153,153,0.5);

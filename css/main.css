@@ -1,7 +1,7 @@
 @import "screen.css";
 /*整体背景色*/
 #bg{background: #09b1b0;}
-iframe{overflow: auto;}
+iframe{overflow: auto;height: 100%;}
 #bg>header,#logout,
 #bg>section,#bg>section>.left,#bg>section>.right{
     box-sizing: border-box;
