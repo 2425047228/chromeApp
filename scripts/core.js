@@ -20,6 +20,7 @@
         }
         return retArr;
     };
+
     /****************************************js原型封装**********************************************/
     var formValidator = function() {
         this.required = function(node){    //验证必填项方法
@@ -32,7 +33,7 @@
     var c = {
         storage:chrome.storage.local,    //需在manifest中注册storage权限
         byId:function (id) {return document.getElementById(id);},    //获取指定id节点
-        byClass:function (className) {return document.querySelectorAll('.' + className)},
+        byClass:function (className) {return document.querySelectorAll('.' + className);},
         byTagName:function (tagName) {return document.getElementsByTagName(tagName);},
         iframe:function () {return this.byTagName("iframe")[0];},
         show:function (node) {node.setAttribute("style","display:block");},
@@ -44,7 +45,7 @@
      * 对获取的列表数组添加函数时间
      * @param callback 绑定函数
      */
-    c.byClass.__proto__.__proto__.bindClick = function (callback) {
+    c.__proto__.bindClick = function (callback) {
         var len = this.length;
         if (typeof callback === "function") {
             for (var i = 0;i < len;++i) {
@@ -286,11 +287,13 @@
     */ 
      c.toParamString = function (obj) {
         if (typeof obj !== "object") return obj;
+         obj.__proto__ = null;    //防止原型链继承
         var param = '';
         for (var k in obj) {
             //使用encodeURIComponent将参数值中的特殊字符进行转义防止ajax发送请求时缺省掉特殊字符
             param += k+'='+encodeURIComponent(obj[k])+'&';
         }
+        //console.log(param);
         return param;
     }
 
