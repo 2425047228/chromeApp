@@ -1,4 +1,9 @@
-body{max-height: calc(1080px - 114px);overflow: auto;}    /*超出屏幕出现滚动条*/
+/*超出屏幕出现滚动条*/
+body{
+    max-height: calc(1080px - 114px);
+    min-height: calc(600px - 114px);
+    overflow: auto;
+}
 .search,table,th,td,.btn,
 .checkbox,.checkbox>.checkbox-title,.checkbox>.checkbox-body,
 .table-checkbox tr>td:first-of-type>.option,
