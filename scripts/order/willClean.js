@@ -33,9 +33,8 @@ window.onload = function () {
             html += '<td>上门服务费&emsp;&emsp;&emsp;'+data[i].freight+'</td>';
             html += '<td>' +data[i].sum+ '件</td>';
             html += '<td class="red">' +data[i].amount+ '</td>';
-            html += '<td>' +data[i].name+ '</td>';
-            html += '<td>' +data[i].phone+ '</td>';
-            html += '<td>' +data[i].adr+ '</td>';
+            html += '<td>' +data[i].name+ '<br>' +data[i].phone+ '</td>';
+            html += '<td style="max-width: 170px;">' +data[i].adr+ '</td>';
             html += '<td>' +data[i].update_time+ '</td>';
             html += '<td><input type="button" value="衣物检查" class="tab-btn tab-small-btn"><br>' +
                 '<input type="button" value="检查完成" class="tab-btn tab-small-btn"><br>' +
