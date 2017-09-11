@@ -8,6 +8,12 @@
              var dataObj = core.jsonParse(response);
              if (!core.apiVerify(dataObj)) return false;
              var data = dataObj.data;
+             //判断待处理订单数量非0则展示
+             if (0 != data.will_dispose) {
+                 var em = document.createElement('em');
+                 em.innerText = data.will_dispose;
+                 core.byClass('redirect')[1].appendChild(em);
+             }
              core.byId("merchant").innerText = data.mname;    //填充商家名称
              core.getImage(api.getHost()+data.circle_logo,core.byId("avatar"));    //填充商家头像
              statusSwitchover(1==data.state);    //根据店铺状态切换样式

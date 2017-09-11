@@ -42,6 +42,35 @@
     }
 
     /**
+     * 创建单行多列的表格行
+     * @param length 列数
+     * @return object 包含td td 的对象
+     */
+    u.createTds = function (length) {
+        if (isNaN(length) || length < 1) return false;
+        var table = {};
+        table.tr = document.createElement('tr');
+        table.td = [];
+        for (var i = 0;i < length;++i) {
+            table.td[i] = document.createElement('td');
+            table.tr.appendChild(table.td[i]);
+        }
+        return table;
+    }
+
+    /**
+     * 创建图片节点
+     * @param url string 图片链接地址
+     * @return object 返回图片对象
+     */
+    u.createImg = function (url) {
+        if (typeof url !== "string" || url.length < 1) return false;
+        var img = document.createElement('img');
+        img.src = url;
+        return img;
+    }
+
+    /**
      * tab切换效果函数及切换后回调处理
      * @param className tab所属的类名称
      * @param switchoverClass 点击切换效果增减的class
@@ -97,7 +126,7 @@
             optionNodes[i].innerText = obj.options[i];
             bodyArea.appendChild(optionNodes[i]);
             optionNodes[i].onclick = function () {
-                this.classList.toggle('checked');
+                u.toggleChecked(this);
             }
         }
         //创建按钮节点并追加至复选框内容部分节点中
@@ -127,6 +156,16 @@
         }
     };
 
+    u.toggleChecked = function (node,callback) {
+        var isExist = node.classList.contains('checked');
+        if (isExist) {
+            node.classList.remove('checked');
+        } else {
+            node.classList.add('checked');
+        }
+        typeof callback === "function" && callback(!isExist);
+    }
+
     /**
      * 分页视图构建函数
      * @param object maxPage = 最大页数; nowPage = 当前页数; showPageNumber = 展示显示页码数的条数
@@ -154,7 +193,6 @@
 
             }*/
         }
-
         page.innerHTML = html;
         var pageList = page.childNodes;
         var pageListLen = pageList.length;
@@ -167,8 +205,12 @@
                 }
             }
         }
-
-
+    }
+    u.createNotice = function (text) {
+        var container = document.createElement('div');
+        container.className = 'notice';
+        container.innerText = text;
+        return container;
     }
     window.UI = u;
 })(window);

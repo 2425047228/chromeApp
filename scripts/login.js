@@ -18,10 +18,7 @@ window.onload = function () {
             core.storage.set(
                 {role:result.role,token:result.token,clerk:result.uid}, 
                 function(){
-                    chrome.app.window.create(
-                        "../views/main.html?from=login", 
-                        {id: "main",state: "fullscreen"}
-                    );
+                    chrome.app.window.create("../views/main.html?from=login",{id: "main",state: "fullscreen"});
                 }
             );
         });
