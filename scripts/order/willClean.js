@@ -44,9 +44,9 @@ window.onload = function () {
             html += '<td style="max-width: 100px;">' +data[i].name+ '<br>' +data[i].phone+ '</td>';
             html += '<td style="max-width: 170px;">' +data[i].adr+ '</td>';
             html += '<td style="max-width: 170px;">' +data[i].update_time+ '</td>';
-            html += '<td><input type="button" value="衣物检查" class="tab-btn tab-small-btn"><br>';
+            html += '<td data-id="'+data[i].id+'"><input type="button" value="衣物检查" class="tab-btn tab-small-btn check"><br>';
             if (1 == data[i].pay_state) {
-                html += '<input type="button" value="检查完成" class="tab-btn tab-small-btn"><br>';
+                html += '<input type="button" value="检查完成" class="tab-btn tab-small-btn done"><br>';
             } else {
                 html += '<div style="display: inline-block;position: relative;"><input type="button" value="检查完成" class="tab-btn tab-small-btn tab-grey-btn" ></div>';
             }
@@ -62,7 +62,10 @@ window.onload = function () {
             notice.style.width =  '257px';
             notice.style.left = (notice.offsetWidth - this.offsetWidth) * -1 + 'px';
             window.setTimeout(function(){parent.removeChild(notice);},3000);
-        })
+        });
+        core.byClass('check').bindClick(function () {
+            return location.href = './check.html?id='+this.parentNode.dataset.id;
+        });
     }
 
 }

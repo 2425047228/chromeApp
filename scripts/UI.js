@@ -2,6 +2,8 @@
  * ui组件封装函数库,使用前需引入core.js
  * @author yangyunlong
  */
+'use strict';
+
 (function(window) {
     var u = {};
     /**
@@ -91,6 +93,28 @@
     }
 
     /**
+     * 创建弹出框背景组件
+     * @return object
+     */
+    u.createAlertBg = function () {
+        var alertBg = core.e('div');
+        alertBg.className = 'alert-bg';
+        return alertBg;
+    }
+
+    /**
+     * 定位相对于背景为中心的弹出框
+     * @param alertBg 背景节点
+     * @param alerter 弹出框节点
+     * @return void
+     */
+    u.positionInBg = function (alertBg,alerter) {
+        var position = core.getCenterPosition(alerter.offsetWidth,alerter.offsetHeight,alertBg);
+        alerter.style.position = 'absolute';
+        alerter.style.top = position.top + 'px';
+        alerter.style.left = position.left + 'px';
+    }
+    /**
      * 创建弹出复选框组件
      * @param obj 参数对象 属性:title=标题,button=确认按钮内容,options=内容数组,callback=回调函数默认参数选中数组
      */
@@ -98,8 +122,7 @@
         var len = obj.options.length;
         if (len < 1) return false;
         //创建背景节点
-        var alertBg = document.createElement('div');
-        alertBg.className = 'alert-bg';
+        var alertBg = this.createAlertBg();
         //创建复选框节点并追加至背景
         var checkbox = document.createElement('div');
         checkbox.className = 'checkbox';
@@ -137,10 +160,7 @@
         bodyArea.appendChild(button);
         //将背景节点追加至body节点中，并将复选框节点定位至背景节点中心
         document.body.appendChild(alertBg);
-        var position = core.getCenterPosition(checkbox.offsetWidth,checkbox.offsetHeight,alertBg);
-        checkbox.style.position = 'absolute';
-        checkbox.style.top = position.top + 'px';
-        checkbox.style.left = position.left + 'px';
+        this.positionInBg(alertBg,checkbox);
         //绑定确认按钮后的回调函数
         if (typeof obj.callback === "function") {
             button.onclick = function () {
@@ -156,6 +176,113 @@
         }
     };
 
+    /**
+     * 创建弹出输入框组件
+     * @param callback 回调函数
+     * @return void
+     */
+    u.createAlertInput = function (callback) {
+        var alertBg = this.createAlertBg();    //创建背景节点
+        var alerter = core.e('div');    //创建弹出框节点
+        alerter.className = 'alert-input-area';
+        alertBg.appendChild(alerter);
+        document.body.appendChild(alertBg);
+        var input = [{},{},{},{}];
+        for (var i = 0;i < 4;++i) {
+            input[i].line = core.e('div');    //创建单行
+            input[i].line.className = 'clearfix';
+            alerter.appendChild(input[i].line);
+            if (i != 3) {    //判断否为button区域
+                input[i].inputArea = core.e('div');    //创建input 区域
+                input[i].inputArea.className = 'input-area right';
+                input[i].label = core.e('label');    //创建label 区域
+                input[i].label.className = 'right label';
+                input[i].postfix = core.e('em');    //创建后缀节点
+                input[i].postfix.className = 'postfix';
+                input[i].inputArea.appendChild(input[i].postfix);
+                if (2 == i) {    //判断是否为textarea
+                    input[i].postfix.innerText = '0/40';
+                    input[i].inputArea.classList.add('text-area');
+                    input[i].inputText = core.e('textarea');
+                    input[i].inputText.setAttribute('cols','30');
+                    input[i].inputText.setAttribute('rows','10');
+                    input[i].inputText.setAttribute('maxlength','40');
+                    input[i].inputText.setAttribute('id','comment');
+                    input[i].label.setAttribute('for','comment');
+                    input[i].label.innerText = '备注：';
+                    var postfix = input[i].postfix;
+                    input[i].inputText.onkeydown = input[i].inputText.onkeyup = function () {
+                        postfix.innerText = this.value.length + '/40';
+                    }
+                } else {
+                    input[i].postfix.innerText = '元';
+                    input[i].inputText = core.e('input');
+                    input[i].inputText.setAttribute('type','text');
+                    if (0 == i) {
+                        input[i].inputText.setAttribute('id','special');
+                        input[i].label.setAttribute('for','special');
+                        input[i].label.innerText = '特殊工艺加价：';
+                    } else {
+                        input[i].inputText.setAttribute('id','hedging');
+                        input[i].label.setAttribute('for','hedging');
+                        input[i].label.innerText = '保值金额：';
+                    }
+                }
+                //追加节点
+                input[i].inputArea.appendChild(input[i].inputText);
+                input[i].line.appendChild(input[i].inputArea);
+                input[i].line.appendChild(input[i].label);
+            } else {
+                //创建按钮区域
+                input[i].line.classList.add('button-area');
+                input[i].cancel = core.e('input');
+                input[i].confirm = core.e('input');
+                input[i].cancel.setAttribute('type','button');
+                input[i].confirm.setAttribute('type','button');
+                input[i].cancel.value = '取消';
+                input[i].confirm.value = '确认';
+                input[i].cancel.className = 'btn btn-cancel btn-larger left';
+                input[i].confirm.className = 'btn btn-confirm btn-larger right';
+                //追加节点
+                input[i].line.appendChild(input[i].cancel);
+                input[i].line.appendChild(input[i].confirm);
+            }
+        }
+        //定位
+        this.positionInBg(alertBg,alerter);
+        typeof callback === "function" && callback(input,alertBg);
+        /*<div class="alert-bg">
+         <section class="alert-input-area">
+         <div class="clearfix">
+         <div class="input-area right"><input type="text" id="special"><em class="postfix">元</em></div>
+         <label for="special" class="right label">特殊工艺加价：</label>
+         </div>
+         <div class="clearfix">
+         <div class="input-area right"><input type="text" id="hedging"><em class="postfix">元</em></div>
+         <label for="hedging" class="right label">保值金额：</label>
+         </div>
+         <div class="clearfix">
+         <div class="input-area right text-area">
+         <textarea id="comment" cols="30" rows="10" maxlength="40"></textarea>
+         <em class="postfix">0/40</em>
+         </div>
+         <label for="comment" class="right label">备注：</label>
+         </div>
+         <div class="clearfix button-area">
+         <input type="button" value="取消" class="btn btn-cancel btn-larger left">
+         <input type="button" value="确认" class="btn btn-confirm btn-larger right">
+         </div>
+         </section>
+         </div>*/
+
+    }
+
+    /**
+     * 复选框选中切换
+     * @param node 节点
+     * @param callback 回调函数
+     * @return void
+     */
     u.toggleChecked = function (node,callback) {
         var isExist = node.classList.contains('checked');
         if (isExist) {

@@ -2,7 +2,7 @@ window.onload = function () {
     UI.createCrumbs([['订单处理','./manage.html'], ['添加项目','#']]);
     var param = core.paramToObject();
     var token,data;
-    var isChanged,isFirst = false;
+    var isChanged = false,isFirst = false;
     var changeData = [];
     core.storage.get('token',function (result) {
         token = result.token;
@@ -22,11 +22,10 @@ window.onload = function () {
                     if (0 != data[i].type[j].state_type) {
                         totalNumber += data[i].type[j].num * 1;
                         changeData.push({
-                            name:data[i].type[j].name,
                             orderid:param.id,
-                            itemcount:data[i].type[j].num,
+                            type:data[i].type[j].id,
                             price:data[i].type[j].price,
-                            type:data[i].type[j].id
+                            itemcount:data[i].type[j].num
                         });
                     }
                 }
@@ -132,15 +131,16 @@ window.onload = function () {
         if (typeof object !== "object") return false;
         var len = changeData.length;
         isChanged = true;
+        var addObj = {orderid:object.orderid,type:object.type,price:object.price,itemcount:object.itemcount};
         if (len < 1) {
-            return changeData.push(object);
+            return changeData.push(addObj);
         } else {
             for (var i = 0;i < len;++i) {
                 if (changeData[i].type == object.type) {
                     return ++changeData[i].itemcount;
                 }
             }
-            return changeData.push(object);
+            return changeData.push(addObj);
         }
     }
     function subtractItem(type) {    //删除项目
@@ -161,6 +161,7 @@ window.onload = function () {
 
     }
     core.byId('next').onclick = function () {
+        console.log(isChanged);
         if (isChanged === false) return location.href = './editor.html?id='+param.id;    //判断是否更改
         if (changeData.length < 1) {
             var notice = UI.createNotice('请选择项目!');
@@ -171,7 +172,8 @@ window.onload = function () {
             notice.style.top = position.top + 'px';
             window.setTimeout(function(){document.body.removeChild(notice)},3000);
         }
-        var url = isFirst ? api.getUrl('addItems') : api.getUrl('getItems');    //第一次调用addItems否则调用getItems
+        //var url = isFirst ? api.getUrl('addItems') : api.getUrl('getItems');    //第一次调用addItems否则调用getItems
+        var url = api.getUrl('addItems');
         core.post(url,{token:token,val:JSON.stringify(changeData),id:param.id},function (data) {
             var jsonData = core.jsonParse(data);
             console.log(jsonData);

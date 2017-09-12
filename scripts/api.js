@@ -16,7 +16,11 @@
         getItems:"/app.php/Home/Merchant/mod_item_add",    //获取商家项目列表 orderid-订单id
         addItems:"/app.php/Offline/Merchant/item_add",    //添加项目接口:val json:orderid type price itemcount
         done:"/app.php/Home/Merchant/wancheng",    //送件完成 id 订单id
-        editorPrice:"/app.php/Home/Merchant/edit_price"     //编辑价格 id 订单id
+        editorPrice:"/app.php/Home/Merchant/edit_price",     //编辑价格 id 订单id
+        modifySpecial:"/app.php/Home/Merchant/mod_gongyi",    //工艺加价修改接口 special 价格 special_comment 备注 id 项目id
+        modifyHedging:"/app.php/Home/Merchant/hedging",     //保值金额  hedging 输入价格除以20 id 项目id
+        gotIt:"/app.php/Home/Merchant/shoujian",    //确认收件    id 订单id
+        check:"/app.php/Home/Merchant/jiancha"    //衣物检查    id 订单id
     };
     /**
      * 获取指定成员属性的url

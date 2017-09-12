@@ -2,6 +2,7 @@
  * 核心工具封装函数对象
  * @author yangyunlong
  */
+'use strict';
 
 (function(window){
     /****************************************js原型封装**********************************************/
@@ -23,9 +24,16 @@
 
     /****************************************js原型封装**********************************************/
     var formValidator = function() {
+        this.__proto__ = null;
         this.required = function(node){    //验证必填项方法
-            if (node.getAttribute("required") !== null) {
-                if (c.trim(node.value) === "") return false;
+            if (node.getAttribute('required') !== null) {
+                if (node.value.trim() === "") return false;
+            }
+            return true;
+        }
+        this.number = function (node) {
+            if (node.getAttribute('number') !== null) {
+                if (isNaN(node.value)) return false;
             }
             return true;
         }
@@ -33,6 +41,7 @@
     var c = {
         storage:chrome.storage.local,    //需在manifest中注册storage权限
         byId:function (id) {return document.getElementById(id);},    //获取指定id节点
+        e:function (nodeName) {return document.createElement(nodeName);},    //创建节点
         byClass:function (className) {return document.querySelectorAll('.' + className);},
         byTagName:function (tagName) {return document.getElementsByTagName(tagName);},
         iframe:function () {return this.byTagName("iframe")[0];},
@@ -104,7 +113,7 @@
         var len = arguments.length;
         var obj = {valid:false,data:{}};
         if (len < 1) return false;
-        var tempNode,validation = null
+        var tempNode,validation = null;
         for (var i = 0;i < len;++i) {
             if (typeof arguments[i] === "object") {
                 tempNode = this.byId(arguments[i][0]);
@@ -127,8 +136,6 @@
         obj.valid = true;
         return obj;
     }
-    //去除内容空白字符
-    c.trim = function(str) {return str.replace(/(^\s*)|(\s*$)/g, "");}
     //调用表单验证器 返回验证结果 boolean值
     c.formVerify = function(node) {
         if (!this.validatorSwitch) return true;    //判断表单验证器是否开启状态
