@@ -24,6 +24,21 @@
     }
 
     /**
+     * 创建多个节点
+     * @param nodeName 节点名称
+     * @param number 节点数量
+     * @return Array
+     */
+    u.createNodes = function (nodeName,number) {
+        var retArr = [];
+        if (number < 1) return retArr;
+        for (var i = 0;i < number;++i) {
+            retArr.push(core.e(nodeName));
+        }
+        return retArr;
+    };
+
+    /**
      * table td生成器
      * @param array 二维数组
      * @return string 生成html结果

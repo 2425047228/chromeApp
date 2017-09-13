@@ -16,10 +16,37 @@ input,button,textarea{border: none;outline: none;-webkit-appearance: none;}
 .add{background: url(../images/add.png) no-repeat center left;}
 /*减少图标样式*/
 .subtract{background: url(../images/subtract.png) no-repeat center left;}
+/*上传图片样式*/
+.upload-img{background: url(../images/upload-img.png) no-repeat;}
+.upload-img-delete{
+    background: url(../images/upload-img-delete.png) no-repeat;
+    position: absolute;
+    top:0;right:0;
+    display: inline-block;
+    height: 20px;width: 20px;
+}
+.text-bottom{display: inline-block;position: absolute;bottom:0;left:0;}
 /*容器样式*/
 .container{padding:18px 22px 0 16px;}
+.flex-container{
+    display: -webkit-flex;display: flex;
+    flex-wrap: wrap;
+    padding-top: 15px;
+}
+.flex-item{
+    text-align: right;
+    font-size: 16px;
+    position: relative;
+    display: inline-block;
+    height: 81px;
+    width: 81px;
+    margin-right: 16px;
+    margin-bottom: 16px;
+}
+.flex-item-last{width: 195px;color: #ff6f43;text-align:center}
 .tiny-container{display: inline-block;height: 19px;padding: 0 18px;line-height: 19px;}
 .bg-container{background: rgb(240,248,254);border: 1px solid rgb(240,242,245);padding: 10px 12px;font-size: 16px;}
+/*提示容器样式*/
 .notice{display: inline-block;background: rgba(0,0,0,0.7);color: #ffffff;font-size: 16px;padding: 6px 22px;}
 /*面包屑样式*/
 #crumbs{

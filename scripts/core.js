@@ -50,6 +50,7 @@
         formValidator:new formValidator(),    //表单验证器
         validatorSwitch:true    //表单验证器开关，默认开启
     };
+
     /**
      * 对获取的列表数组添加函数时间
      * @param callback 绑定函数
