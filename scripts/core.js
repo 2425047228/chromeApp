@@ -94,12 +94,10 @@
      * @param className class名称
      * @return boolean 找寻到的节点
      */
-    c.findBycClass = function (node,className) {
+    c.findByClassForFirstChild = function (node,className) {
         var children = node.childNodes;
-        var name = null;
         for (var index in children) {
-            name = children[index].className;
-            if (typeof name !== "undefined" &&  name.indexOf(className) !== -1) return children[index];
+            if (children[index].classList.contains(className)) return children[index];
         }
         return false;
     }
@@ -286,6 +284,20 @@
             typeof callback === "function" && callback(url,this.response);
         }
         xhr.send();
+    }
+    
+    c.chooseImage = function () {
+        chrome.fileSystem.chooseEntry(
+            {
+                type: 'openFile',
+                accepts:{
+
+                }
+            },
+            function (fileEntry) {
+                
+            }
+        );
     }
 
    /**

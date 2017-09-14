@@ -45,15 +45,41 @@ window.onload = function () {
             if (tempLen > 0) {
                 imgNode[i] = [];
                 for (j = 0;j < tempLen;++j) {
-                    imgNode[i][j] = core.e('img');
-                    core.getImage(api.host + data[i].img[j],imgNode[i][j]);
+                    imgNode[i][j] = {
+                        container:core.e('div'),
+                        image:core.e('img'),
+                        imageDelete:core.e('em')
+                    };
+                    imgNode[i][j].container.className = 'flex-item';
+                    imgNode[i][j].image.style.width = imgNode[i][j].image.style.height = 'inherit';
+                    imgNode[i][j].imageDelete.className = 'upload-img-delete';
+                    imgNode[i][j].imageDelete.setAttribute('data-path',data[i].img[j]);
+                    imgNode[i][j].imageDelete.setAttribute('data-id',data[i].id);
+                    imgNode[i][j].container.appendChild(imgNode[i][j].image);
+                    imgNode[i][j].container.appendChild(imgNode[i][j].imageDelete);
+                    tempNode[4].appendChild(imgNode[i][j].container);    //照片节点追加至照片容器节点中
+                    core.getImage(api.host + data[i].img[j],imgNode[i][j].image);
+                    imgNode[i][j].imageDelete.onclick = function () {
+                        var container = this.parentNode;
+                        core.post(
+                            api.getUrl('deleteImage'),
+                            {token:token,image:this.dataset.path,orderid:param.id,id:this.dataset.id},
+                            function (json) {
+                                if (core.apiVerify(core.jsonParse(json))) {
+                                    container.parentNode.removeChild(container);    //操作成功删除该节点
+                                }
+                            }
+                        );
+                    }
                 }
             }
             //照片上传节点
             tempNode[6].className = 'flex-item upload-img';
             tempNode[4].appendChild(tempNode[6]);
-            if (tempLen >= 11) {    //判断图片是否已到添加限制，如果是，则隐藏添加操作
-                tempNode[6].style.display = 'none';
+            tempNode[6].onclick = function () {    //判断nodes少于14
+                var container = this.parentNode;
+                if (container.childNodes.length >= 14) return false;
+                console.log(container.childNodes);
             }
             //提示照片数量限制节点
             tempNode[7].className = 'flex-item flex-item-last';
