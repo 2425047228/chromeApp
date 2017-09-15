@@ -38,7 +38,7 @@
          var option = core.byTagName("dd")[i];
          option.setAttribute("style","display:none;");
          node.onclick = function () {
-             var tagNode = core.findByClassForFirstChild(node,"right");
+             var tagNode = core.findByClassForFirstChild(this,"right");
              var display = option.style.display;
              if (
                  typeof display !== "undefined"

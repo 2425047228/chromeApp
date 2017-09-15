@@ -10,7 +10,6 @@ window.onload = function () {
             var jsonData = core.jsonParse(json);
             data = jsonData.data;
             dataView(data);
-            console.log(data);
         })
     });
     

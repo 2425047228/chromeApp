@@ -25,4 +25,4 @@ chrome.app.runtime.onLaunched.addListener(function() {    //packaged app 初始�
 });
 
 //窗口关闭时操作
-chrome.app.window.onClosed.addListener(function(){}); 
+chrome.app.window.onClosed.addListener(function(){});

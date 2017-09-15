@@ -21,7 +21,8 @@
         modifyHedging:"/app.php/Home/Merchant/hedging",     //保值金额  hedging 输入价格除以20 id 项目id
         gotIt:"/app.php/Home/Merchant/shoujian",    //确认收件    id 订单id
         check:"/app.php/Home/Merchant/jiancha",    //衣物检查    id 订单id
-        deleteImage:"/app.php/Home/Merchant/delImages"    //删除衣物检查图片 image 图片路径 orderid 订单id id 项目id
+        deleteImage:"/app.php/Home/Merchant/delImages",    //删除衣物检查图片 image 图片路径 orderid 订单id id 项目id
+        checkImageUpload:"/app.php/Home/Merchant/imagesUpload"    //衣物检查图片上传接口  orderid 订单id id 项目id file 文件
     };
     /**
      * 获取指定成员属性的url

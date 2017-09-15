@@ -6,6 +6,10 @@ window.onload = function () {
         ['待清洗', './willClean.html'],
         ['衣物检查', '#']
     ]);
+    core.byId('next').onclick = function () {
+        var fd = new FormData(document.forms[0]);
+        console.log(fd);
+    }
     var token,data;
     core.storage.get('token',function (result) {
         token = result.token;
@@ -77,9 +81,38 @@ window.onload = function () {
             tempNode[6].className = 'flex-item upload-img';
             tempNode[4].appendChild(tempNode[6]);
             tempNode[6].onclick = function () {    //判断nodes少于14
+                var that = this;
                 var container = this.parentNode;
-                if (container.childNodes.length >= 14) return false;
-                console.log(container.childNodes);
+                var imageNodes = container.childNodes;
+                var imageNumber = (imageNodes.length - 3);
+                if (imageNumber >= 11) return false;
+                core.chooseImage(function (Entry) {
+                    var fileEntries = Entry.fileEntries;
+                    if (typeof fileEntries !== "undefined") {
+                        var len = fileEntries.length;
+                        var addNodes = [];
+                        for (var i = 0;i < len;++i) {
+                            if (imageNumber >= 11) break;
+                            fileEntries[i].file(function (file) {
+                                var reader = new FileReader();
+                                reader.onload = function () {
+                                    console.log(this);
+                                    var fd = new FormData();
+                                    fd.append('file',this.result);
+                                }
+                                reader.readAsBinaryString(file);
+                            });
+                            addNodes[i] = {container:core.e('div'),image:core.e('img')};
+                            addNodes[i].container.className = 'flex-item';
+                            addNodes[i].image.style.width = addNodes[i].image.style.height = 'inherit';
+                            //addNodes[i].image.src = fileEntries[i].fullPath;
+                            addNodes[i].container.appendChild(addNodes[i].image);
+                            container.insertBefore(addNodes[i].container,that);    //照片节点追加至照片容器节点中
+                            ++imageNumber;
+                        }
+                    }
+                });
+                //console.log(container.childNodes);
             }
             //提示照片数量限制节点
             tempNode[7].className = 'flex-item flex-item-last';

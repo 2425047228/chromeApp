@@ -97,7 +97,11 @@
     c.findByClassForFirstChild = function (node,className) {
         var children = node.childNodes;
         for (var index in children) {
-            if (children[index].classList.contains(className)) return children[index];
+            if (
+                typeof children[index].classList !== "undefined"
+                &&
+                children[index].classList.contains(className)
+            ) return children[index];
         }
         return false;
     }
@@ -258,7 +262,9 @@
     */
     c.post = function(url, args, callback) {
         var xhr = new XMLHttpRequest();
-        if (typeof args === "object") args = this.toParamString(args);
+        if (typeof args === "object") {
+            if (!(args instanceof FormData)) args = this.toParamString(args);
+        }
         xhr.open("POST", url, true);
         xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
         xhr.onreadystatechange = function() {
@@ -286,16 +292,23 @@
         xhr.send();
     }
     
-    c.chooseImage = function () {
+    c.chooseImage = function (callback) {
         chrome.fileSystem.chooseEntry(
             {
                 type: 'openFile',
-                accepts:{
-
-                }
+                accepts:[
+                    {
+                        mimeTypes:['image/jpeg','image/png'],
+                        extensions:['jpeg','jpg','JPEG','JPG','png','PNG']
+                    }
+                ],
+                acceptsMultiple:true
             },
-            function (fileEntry) {
-                
+            function (fileEntries) {
+                typeof callback === "function" && callback({
+                    fileEntries:fileEntries,
+                    error:chrome.runtime.lastError
+                });
             }
         );
     }
