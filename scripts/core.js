@@ -6,9 +6,31 @@
 
 (function(window){
     /****************************************js原型封装**********************************************/
+    String.prototype.base64toBlob = function () {
+        var splitArray = this.split(',');    //分割base64数据的头与内容
+        var byteString = atob(splitArray[1]);    //base64解码
+        var mimeString = splitArray[0].split(':')[1].split(';')[0];    //data:image/png;base64，获取mime类型
+        var bufferSize = byteString.length;    //获取数据的大小
+        var buffer = new ArrayBuffer(bufferSize);    //创建同等于数据大小的内存区域
+        var dataView = new Uint8Array(buffer);    //创建一个8位无符号整数，长度1个字节的数据视图，并分配buffer
+        for (var i = 0; i < byteString.length; i++) {
+            dataView[i] = byteString.charCodeAt(i);    //获取每个字节Unicode编码并追加数据视图数组
+        }
+        return new Blob([buffer], {type: mimeString});    //返回原数据类型对象
+    };
     String.prototype.trim = function () {
         return this.replace(/(^\s*)|(\s*$)/g,'');
-    }
+    };
+    String.prototype.parseJson = function (retdata) {
+        try {
+            var obj =  JSON.parse(this);
+        } catch (e) {
+            console.log(e.message);
+            return {};
+        }
+        if (typeof retdata !== "undefined" && retdata) return obj.data;
+        return obj;
+    };
     Array.prototype.limit = function (index,length) {
         var len = this.length;
         if (len < index + 1) return [];    //判断开始索引是否超出当前数组长度
@@ -262,17 +284,44 @@
     */
     c.post = function(url, args, callback) {
         var xhr = new XMLHttpRequest();
-        if (typeof args === "object") {
-            if (!(args instanceof FormData)) args = this.toParamString(args);
-        }
         xhr.open("POST", url, true);
-        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        if (typeof args === "object") {
+            if (!(args instanceof FormData)) {
+                args = this.toParamString(args);
+                xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+            }
+        }
+        xhr.send(args);
         xhr.onreadystatechange = function() {
             if (4 == xhr.readyState) {
                 typeof callback === "function" && callback(xhr.responseText);
             }
         }
-        xhr.send(args);
+
+    };
+
+    /**
+     * 基于FormData发送post请求
+     * @param url
+     * @param argsObj 请求参数对象
+     * @param callback 回调函数
+     */
+    c.postFormData = function (url,argsObj,callback) {
+        if (typeof argsObj !== "object") throw new Error('该方法第二个参数必须是一个对象!');
+        var xhr = new XMLHttpRequest(),fd = new FormData();
+        delete fd.__proto__.__proto__.bindClick;    //删除原型bindClick成员方法
+        xhr.open('POST',url,true);
+        for (var k in argsObj) {
+            if (typeof argsObj[k] === "object") {    //判断是否为文件对象
+                fd.append(k, argsObj[k].file, argsObj[k].name);
+            } else {
+                fd.append(k, argsObj[k]);
+            }
+        }
+        xhr.send(fd);
+        xhr.onreadystatechange = function () {
+            if (4 == xhr.readyState) typeof callback === "function" && callback(xhr.responseText);
+        }
     }
 
     /**

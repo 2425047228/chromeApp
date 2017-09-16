@@ -9,6 +9,10 @@ window.onload = function () {
     core.byId('next').onclick = function () {
         var fd = new FormData(document.forms[0]);
         console.log(fd);
+        var fd2 = new FormData();
+        fd2.append("dfdfd","dfdfd");
+        fd2.set("dfdf33d","dfdfdf");
+        console.log(fd2.get('dfdfd'));
     }
     var token,data;
     core.storage.get('token',function (result) {
@@ -51,38 +55,24 @@ window.onload = function () {
                 for (j = 0;j < tempLen;++j) {
                     imgNode[i][j] = {
                         container:core.e('div'),
-                        image:core.e('img'),
-                        imageDelete:core.e('em')
+                        image:core.e('img')
                     };
                     imgNode[i][j].container.className = 'flex-item';
                     imgNode[i][j].image.style.width = imgNode[i][j].image.style.height = 'inherit';
-                    imgNode[i][j].imageDelete.className = 'upload-img-delete';
-                    imgNode[i][j].imageDelete.setAttribute('data-path',data[i].img[j]);
-                    imgNode[i][j].imageDelete.setAttribute('data-id',data[i].id);
+                    createDelNode(imgNode[i][j].container,data[i].img[j],data[i].id);
                     imgNode[i][j].container.appendChild(imgNode[i][j].image);
-                    imgNode[i][j].container.appendChild(imgNode[i][j].imageDelete);
                     tempNode[4].appendChild(imgNode[i][j].container);    //照片节点追加至照片容器节点中
                     core.getImage(api.host + data[i].img[j],imgNode[i][j].image);
-                    imgNode[i][j].imageDelete.onclick = function () {
-                        var container = this.parentNode;
-                        core.post(
-                            api.getUrl('deleteImage'),
-                            {token:token,image:this.dataset.path,orderid:param.id,id:this.dataset.id},
-                            function (json) {
-                                if (core.apiVerify(core.jsonParse(json))) {
-                                    container.parentNode.removeChild(container);    //操作成功删除该节点
-                                }
-                            }
-                        );
-                    }
                 }
             }
             //照片上传节点
             tempNode[6].className = 'flex-item upload-img';
+            tempNode[6].setAttribute('data-id',data[i].id);
             tempNode[4].appendChild(tempNode[6]);
             tempNode[6].onclick = function () {    //判断nodes少于14
                 var that = this;
-                var container = this.parentNode;
+                var itemId = that.getAttribute('data-id');
+                var container = that.parentNode;
                 var imageNodes = container.childNodes;
                 var imageNumber = (imageNodes.length - 3);
                 if (imageNumber >= 11) return false;
@@ -90,30 +80,41 @@ window.onload = function () {
                     var fileEntries = Entry.fileEntries;
                     if (typeof fileEntries !== "undefined") {
                         var len = fileEntries.length;
-                        var addNodes = [];
                         for (var i = 0;i < len;++i) {
                             if (imageNumber >= 11) break;
                             fileEntries[i].file(function (file) {
+                                var item = core.e('div'),image = new Image();     //创建图片及容器
+                                item.className = 'flex-item';
+                                image.style.width = image.style.height = 'inherit';
+                                item.appendChild(image);
+                                container.insertBefore(item,that);    //照片节点追加至照片容器节点中
                                 var reader = new FileReader();
                                 reader.onload = function () {
-                                    console.log(this);
-                                    var fd = new FormData();
-                                    fd.append('file',this.result);
-                                }
-                                reader.readAsBinaryString(file);
+                                    image.src = this.result;
+                                    core.postFormData(
+                                        api.getUrl('checkImageUpload'),
+                                        {
+                                            token:token,
+                                            orderid:param.id,
+                                            id:itemId,
+                                            file:{
+                                                file:this.result.base64toBlob(),
+                                                name:'i.png'
+                                            }
+                                        },
+                                        function (json) {
+                                            var data = json.parseJson(true);
+                                            if (typeof data[0] === "string") {createDelNode(item,data[0],itemId);}
+                                        }
+                                    );
+                                };
+                                reader.readAsDataURL(file);
                             });
-                            addNodes[i] = {container:core.e('div'),image:core.e('img')};
-                            addNodes[i].container.className = 'flex-item';
-                            addNodes[i].image.style.width = addNodes[i].image.style.height = 'inherit';
-                            //addNodes[i].image.src = fileEntries[i].fullPath;
-                            addNodes[i].container.appendChild(addNodes[i].image);
-                            container.insertBefore(addNodes[i].container,that);    //照片节点追加至照片容器节点中
                             ++imageNumber;
                         }
                     }
                 });
-                //console.log(container.childNodes);
-            }
+            };
             //提示照片数量限制节点
             tempNode[7].className = 'flex-item flex-item-last';
             tempNode[7].innerHTML = '<div class="text-bottom">（上传照片不得超过11张）</div>';
@@ -151,28 +152,26 @@ window.onload = function () {
             colorEditor[i].value = questionEditor[i].value = '编辑';
             core.byId('body').appendChild(tempNode[0]);
         }
-        /*<section class="container">
-         <div class="clearfix bg-container">
-         <div class="left">羊毛衬衫(干洗)</div>
-         <div class="right">数量：×<span>1</span></div>
-         </div>
+    }
 
-         <section class="flex-container">
-         <div class="flex-item">上传照片&nbsp;:</div>
-         <div class="flex-item"><em class="upload-img-delete"></em></div>
-         <div class="flex-item upload-img"></div>
-         <div class="flex-item flex-item-last"><div class="text-bottom">（上传照片不得超过11张）</div></div>
-         </section>
-
-
-         <section class="page-info">
-         <div>颜色&nbsp;:</div><div>白条蓝，彩虹</div>
-         <input type="button" value="编辑" class="btn btn-editor">
-         </section>
-         <section class="page-info">
-         <div>问题描述&nbsp;:</div><div>大片污渍，不堪入目</div>
-         <input type="button" value="编辑" class="btn btn-editor">
-         </section>
-         </section>*/
+    function delImageItem(delNode) {
+        var container = delNode.parentNode;
+        core.post(
+            api.getUrl('deleteImage'),
+            {token:token,image:delNode.dataset.path,orderid:param.id,id:delNode.dataset.id},
+            function (json) {
+                if (core.apiVerify(json.parseJson())) {
+                    container.parentNode.removeChild(container);    //操作成功删除该节点
+                }
+            }
+        );
+    }
+    function createDelNode(container,path,id) {
+        var delImage = core.e('em');
+        delImage.className = 'upload-img-delete';
+        delImage.setAttribute('data-path',path);
+        delImage.setAttribute('data-id',id);
+        container.appendChild(delImage);
+        delImage.onclick = function () {delImageItem(this);}
     }
 }
