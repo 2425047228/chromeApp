@@ -6,6 +6,14 @@
 
 (function(window){
     /****************************************js原型封装**********************************************/
+    String.prototype.inArray = function (array) {
+        var len = array.length;
+        if (len < 1) return false;
+        for (var i = 0;i < len;++i) {
+            if (this == array[i]) return i;
+        }
+        return false;
+    };
     String.prototype.base64toBlob = function () {
         var splitArray = this.split(',');    //分割base64数据的头与内容
         var byteString = atob(splitArray[1]);    //base64解码
@@ -63,7 +71,12 @@
     var c = {
         storage:chrome.storage.local,    //需在manifest中注册storage权限
         byId:function (id) {return document.getElementById(id);},    //获取指定id节点
-        e:function (nodeName) {return document.createElement(nodeName);},    //创建节点
+        e:function (nodeName,className,text) {
+            var node = document.createElement(nodeName);
+            if (typeof className === "string") node.className = className;
+            if (typeof text === "string") node.innerText = text;
+            return node
+        },    //创建节点
         byClass:function (className) {return document.querySelectorAll('.' + className);},
         byTagName:function (tagName) {return document.getElementsByTagName(tagName);},
         iframe:function () {return this.byTagName("iframe")[0];},
@@ -394,7 +407,7 @@
         var tempArr = null;
         for (var i = 0;i < len;++i) {
             tempArr = paramArr[i].split('=');
-            obj[tempArr[0]] = tempArr[1];
+            obj[tempArr[0]] = decodeURIComponent(tempArr[1]);
         }
         return obj;
     }

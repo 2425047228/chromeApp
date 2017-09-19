@@ -144,13 +144,21 @@ window.onload = function () {
             tempNode[11].appendChild(questionEditor[i]);
             colorEditor[i].setAttribute('type','button');
             colorEditor[i].setAttribute('data-id',data[i].id);
-            colorEditor[i].setAttribute('data-type','color');
+            colorEditor[i].setAttribute('data-color',data[i].color);
             questionEditor[i].setAttribute('data-id',data[i].id);
-            questionEditor[i].setAttribute('data-type','question');
+            questionEditor[i].setAttribute('data-question',data[i].item_note);
             questionEditor[i].setAttribute('type','button');
             colorEditor[i].className = questionEditor[i].className = 'btn btn-editor';
             colorEditor[i].value = questionEditor[i].value = '编辑';
             core.byId('body').appendChild(tempNode[0]);
+            colorEditor[i].onclick = function () {
+                return location.href = './color.html?id=' + param.id + '&item_id=' + this.dataset.id +
+                    '&color=' + encodeURIComponent(this.dataset.color);
+            }
+            questionEditor[i].onclick = function () {
+                return location.href = './question.html?id=' + param.id + '&item_id=' + this.dataset.id +
+                    '&question=' + encodeURIComponent(this.dataset.question);
+            }
         }
     }
 

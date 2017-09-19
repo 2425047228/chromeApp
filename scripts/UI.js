@@ -29,11 +29,12 @@
      * @param number 节点数量
      * @return Array
      */
-    u.createNodes = function (nodeName,number) {
+    u.createNodes = function (nodeName,number,className) {
         var retArr = [];
         if (number < 1) return retArr;
         for (var i = 0;i < number;++i) {
             retArr.push(core.e(nodeName));
+            if (typeof className !== "undefined") retArr[i].className = className;
         }
         return retArr;
     };
@@ -353,6 +354,84 @@
         container.className = 'notice';
         container.innerText = text;
         return container;
+    }
+    /**
+     * 衣物检查及问题描述样式创建
+     * @param obj 项目对象
+     */
+    u.createItemChecker = function (obj, checkedArr) {
+        var body = document.body,
+            headers = obj.headers,
+            options = obj.options,
+            chosen = core.byId('chosen'),
+            chosenArr = [],tempChosen,tempChosenDelete,
+            len = headers.length,
+            containers = this.createNodes('section',len,'container'),
+            headerNodes = this.createNodes('section',len,'bg-container clearfix'),
+            leftNodes = this.createNodes('div',len,'left'),
+            rightNodes = this.createNodes('div',len,'right'),
+            toggleNodes = this.createNodes('em',len,'shrink'),
+            optionContainers = this.createNodes('section',len),
+            optionsArr = [],tempOptions,tempLen,j,tempOptionsLen,o,tempIndex;
+        for (var i = 0;i < len;++i) {
+            containers[i].appendChild(headerNodes[i]);
+            headerNodes[i].appendChild(leftNodes[i]);
+            leftNodes[i].innerText = headers[i];
+            headerNodes[i].appendChild(rightNodes[i]);
+            rightNodes[i].appendChild(toggleNodes[i]);
+            if (0 == i) toggleNodes[i].className = 'spread';
+            containers[i].appendChild(optionContainers[i]);
+            tempOptions = options[i];
+            tempLen = tempOptions.length;
+            for (j = 0;j < tempLen;++j) {
+                if (tempOptions[j].title != '') optionContainers[i].appendChild(core.e('div','flex-title',tempOptions[j].title));
+                tempOptionsLen = tempOptions[j].list.length;
+                for (o = 0;o < tempOptionsLen;++o) {
+                    optionsArr[i + j + o] = core.e('div','flex-option checker',tempOptions[j].list[o]);
+                    tempIndex = tempOptions[j].list[o].inArray(checkedArr);
+                    if (tempIndex !== false) {
+                        checkedArr.splice(tempIndex,1);
+                        //<div class="flex-center-item">有羽绒服内胆<em class="delete"></em></div>
+                        optionsArr[i + j + o].classList.add('checked');
+                        tempChosen = core.e('div','flex-center-item',tempOptions[j].list[o]);
+                        tempChosenDelete = core.e('em','delete');
+                        tempChosen.appendChild(tempChosenDelete);
+                        chosen.appendChild(tempChosen);
+                        chosenArr.push(tempOptions[j].list[o]);
+                        tempChosenDelete.onclick = function () {
+                            //删除节点处理
+                        }
+                    }
+                    optionContainers[i].appendChild(optionsArr[i + j + o]);
+                    optionsArr[i + j + o].onclick = function () {
+                        //取消选中处理
+                    }
+                }
+            }
+            body.appendChild(containers[i]);
+        }
+        return checkedArr;
+        /*<section class="container">
+         <section class="bg-container clearfix">
+         <div class="left">排污情况</div>
+         <div class="right"><em class="spread"></em></div>
+         </section>
+         <section>
+         <div class="flex-title">食品类污渍</div>
+         <div class="flex-option checker">红色</div>
+         <div class="flex-option checker checked">红色</div>
+         </section>
+         </section>
+         <section class="container">
+         <section class="bg-container clearfix">
+         <div class="left">问题填写</div>
+         <div class="right"><em class="spread"></em></div>
+         </section>
+         <section style="position: relative">
+         <textarea cols="30" rows="10" class="textarea" maxlength="30"></textarea>
+         <em class="postfix-string-num">0/30</em>
+         </section>
+         </section>*/
     }
     window.UI = u;
 })(window);
