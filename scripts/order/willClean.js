@@ -7,12 +7,17 @@ window.onload = function () {
     core.storage.get('token',function (result) {
         token = result.token;
         core.post(api.getUrl('orderHandle'),{token:token,state:2},function (json) {
-            var jsonData = core.jsonParse(json);
-            data = jsonData.data;
+            data = json.parseJson(true);
             dataView(data);
         })
     });
-    
+
+    core.byId('search').onclick = function () {
+        var searchValue = core.byId('search_value').value.trim();
+        if (searchValue == '') return false;
+        var filtrationData = data.filtration('ordersn',searchValue);
+        dataView(filtrationData);
+    }
     
     function dataView(data) {
         var len = data.length;
@@ -52,7 +57,7 @@ window.onload = function () {
             html += '</td></tr>';
         }
         core.byTagName('tbody')[0].innerHTML = html;
-        core.byClass('tab-grey-btn').bindClick(function (e) {
+        core.byClass('tab-grey-btn').bindClick(function () {
             var notice = UI.createNotice('用户尚未付款，您暂时不能做此操作');
             var parent = this.parentNode;
             parent.appendChild(notice);
@@ -61,6 +66,19 @@ window.onload = function () {
             notice.style.width =  '257px';
             notice.style.left = (notice.offsetWidth - this.offsetWidth) * -1 + 'px';
             window.setTimeout(function(){parent.removeChild(notice);},3000);
+        });
+        core.byClass('done').bindClick(function () {
+            var that = this;
+            core.postFormData(api.getUrl('checkDone'),{token:token,orderid:this.parentNode.dataset.id},function (json) {
+                var data = json.parseJson();
+                if (data.retVerify()) {
+                    var parentContainer = that.parentNode.parentNode;
+                    parentContainer.parentNode.removeChild(parentContainer);
+                    console.log(data);
+                } else {
+                    core.notice(data.status);
+                }
+            })
         });
         core.byClass('check').bindClick(function () {
             return location.href = './check.html?id='+this.parentNode.dataset.id;

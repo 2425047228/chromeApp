@@ -7,12 +7,7 @@ window.onload = function () {
         ['衣物检查', '#']
     ]);
     core.byId('next').onclick = function () {
-        var fd = new FormData(document.forms[0]);
-        console.log(fd);
-        var fd2 = new FormData();
-        fd2.append("dfdfd","dfdfd");
-        fd2.set("dfdf33d","dfdfdf");
-        console.log(fd2.get('dfdfd'));
+        return location.href = './willClean.html';
     }
     var token,data;
     core.storage.get('token',function (result) {

@@ -5,9 +5,10 @@ window.onload = function () {
     UI.tabChange('tab','tab-chosen',function (tab) {return location.href = tab.dataset.url;});
 
     var willDispose = new willDispose();
-    var orderList;
+    var orderList,token;
     core.storage.get('token',function (result) {
-        core.post(api.getUrl('orderHandle'),{token:result.token,state:1,page:1,limit:10000},function (json) {
+        token = result.token;
+        core.post(api.getUrl('orderHandle'),{token:token,state:1,page:1,limit:10000},function (json) {
             var jsonData = core.jsonParse(json);
             orderList = jsonData.data;
             willDispose.list(orderList);
@@ -22,9 +23,7 @@ window.onload = function () {
             if (ordersn.indexOf(searchValue) === -1) return false;
             return true;
         });
-        core.storage.get('token',function (result) {
-            willDispose.bindClick(result.token);
-        });
+        willDispose.bindClick(token);
     }
 
     //待处理数据

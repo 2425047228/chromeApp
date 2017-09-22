@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../css/init.css">
+    <link rel="stylesheet" href="../../css/UI.css">
+    <style>
+        .page-notice{padding-top: 42px;text-align: center;font-size: 22px;color: #fd592d;font-weight: 600;}
+        .page-box{
+            padding-top: 53px;
+            display: flex;display: -webkit-flex;
+            justify-content: center;
+        }
+        .page-container{padding-top: 58px;text-align: center;}
+
+        .page-item{
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            display: inline-block;
+            min-height: 400px;
+            width: 370px;
+            background: #f7f7f7;
+            margin:0 37px;
+            padding: 30px 0 0 30px;
+        }
+        .page-item div{text-align: left;}
+        .page-item>div>div{padding-top: 20px;}
+        .page-item>div>div:last-child>div{padding-bottom: 20px;}
+        .page-item>.title{
+            font-size: 22px;
+            color: #333333;
+            font-weight: 600;
+        }
+        .page-item div{
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+<section class="page-container">
+    <section class="search">
+        <input type="text" placeholder="请输入手机号/会员卡号" id="search_value"><input type="button" value="搜索" id="search">
+    </section>
+    <div class="page-notice">请核对以下会员信息，确认无误后收衣下单</div>
+</section>
+<section class="page-box">
+    <div class="page-item">
+        <div class="title">客户信息:</div>
+        <div class="clearfix">
+            <div class="left">客户姓名 :</div>
+            <div class="left" id="name"></div>
+        </div>
+        <div class="clearfix">
+            <div class="left">手机号 :</div>
+            <div class="left" id="mobile"></div>
+        </div>
+        <div class="clearfix">
+            <div class="left">上次到店 :</div>
+            <div class="left" id="time"></div>
+        </div>
+        <div class="clearfix">
+            <div class="left">未取订单 :</div>
+            <div class="left" id="orders">
+            </div>
+        </div>
+    </div>
+    <div class="page-item">
+        <div class="title">会员卡信息:</div>
+        <div class="clearfix">
+            <div class="left">会员卡号 :</div>
+            <div class="left" id="card_number"></div>
+        </div>
+        <div class="clearfix">
+            <div class="left">会员类型 :</div>
+            <div class="left" id="card_name"></div>
+        </div>
+        <div class="clearfix">
+            <div class="left">会员卡余额 :</div>
+            <div class="left" id="card_balance"></div>
+        </div>
+    </div>
+    <div class="page-item">
+        <div class="title">专店会员卡信息:</div>
+        <div class="clearfix">
+            <div class="left">会员卡号 :</div>
+            <div class="left" id="card2_number"></div>
+        </div>
+        <div class="clearfix">
+            <div class="left">会员类型 :</div>
+            <div class="left" id="card2_name"></div>
+        </div>
+        <div class="clearfix">
+            <div class="left">会员卡余额 :</div>
+            <div class="left" id="card2_balance"></div>
+        </div>
+    </div>
+</section>
+<section class="page-container" style="padding-top: 58px;">
+    <input type="button" value="收衣下单" class="tab-btn tab-btn-larger" id="next">
+</section>
+</body>
+<script src="../../scripts/api.js"></script>
+<script src="../../scripts/core.js"></script>
+<script src="../../scripts/UI.js"></script>
+<script src="../../scripts/offline/receive.js"></script>
+</html>

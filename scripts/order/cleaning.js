@@ -7,13 +7,16 @@ window.onload = function () {
     core.storage.get('token',function (result) {
         token = result.token;
         core.post(api.getUrl('orderHandle'),{token:token,state:3},function (json) {
-            console.log(json);
-            var jsonData = core.jsonParse(json);
-            data = jsonData.data;
+            data = json.parseJson(true);
             dataView(data);
-            //console.log(data);
         })
     });
+    core.byId('search').onclick = function () {
+        var searchValue = core.byId('search_value').value.trim();
+        if (searchValue == '') return false;
+        var filtrationData = data.filtration('ordersn',searchValue);
+        dataView(filtrationData);
+    }
 
     function dataView(data) {
         var len = data.length;
@@ -44,9 +47,18 @@ window.onload = function () {
             html += '<td style="max-width: 100px;">' +data[i].name+ '<br>' +data[i].phone+ '</td>';
             html += '<td style="max-width: 170px;">' +data[i].adr+ '</td>';
             html += '<td style="max-width: 170px;">' +data[i].update_time+ '</td>';
-            html += '<td><input type="button" value="清洗完成" class="tab-btn tab-small-btn"><br>';
+            html += '<td><input type="button" value="清洗完成" class="tab-btn tab-small-btn" data-id="' + data[i].id + '"><br>';
             html += '</td></tr>';
         }
         core.byTagName('tbody')[0].innerHTML = html;
+        core.byClass('tab-small-btn').bindClick(function () {
+            var that = this;
+            core.postFormData(api.getUrl('cleanDone'),{token:token,id:that.dataset.id},function (json) {
+                if (json.parseJson().retVerify()) {
+                    var parentContainer = that.parentNode.parentNode;
+                    parentContainer.delete();
+                }
+            })
+        });
     }
 }

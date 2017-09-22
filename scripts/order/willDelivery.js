@@ -13,6 +13,12 @@ window.onload = function () {
             console.log(data);
         })
     });
+    core.byId('search').onclick = function () {
+        var searchValue = core.byId('search_value').value.trim();
+        if (searchValue == '') return false;
+        var filtrationData = data.filtration('ordersn',searchValue);
+        dataView(filtrationData);
+    }
 
     function dataView(data) {
         var len = data.length;

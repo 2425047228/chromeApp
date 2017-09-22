@@ -141,6 +141,7 @@ input,button,textarea{border: none;outline: none;-webkit-appearance: none;}
     border: 1px solid #b2b2b2;
     border-radius: 5px;
     padding-left: 42px;
+    white-space: nowrap;
     background: url(../images/search.png) no-repeat 10px center;
 }
 .search>input[type=text]{height: 100%;width: 270px;font-size: 16px;vertical-align: middle;}
@@ -188,6 +189,11 @@ input,button,textarea{border: none;outline: none;-webkit-appearance: none;}
     text-align: center;
     color: #ffffff;
     background: #02bfbe;
+    border-radius:3px;
+}
+.tab-btn-larger{
+    padding: 15px 115px;
+    line-height: 18px;
 }
 .tab-small-btn{
     height: 28px;

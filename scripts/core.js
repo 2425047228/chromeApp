@@ -6,13 +6,21 @@
 
 (function(window){
     /****************************************js原型封装**********************************************/
+    String.prototype.inArrayObject = function (array,type) {
+        var len = array.length;
+        if (len < 1) return -1;
+        for (var i = 0;i < len;++i) {
+            if (this === array[i][type]) return i;
+        }
+        return -1;
+    }
     String.prototype.inArray = function (array) {
         var len = array.length;
-        if (len < 1) return false;
+        if (len < 1) return -1;
         for (var i = 0;i < len;++i) {
-            if (this == array[i]) return i;
+            if (this === array[i]) return i;
         }
-        return false;
+        return -1;
     };
     String.prototype.base64toBlob = function () {
         var splitArray = this.split(',');    //分割base64数据的头与内容
@@ -50,6 +58,37 @@
             retArr.push(this[tempIndex]);
         }
         return retArr;
+    };
+    Array.prototype.filtration = function (key, string, isStrict) {
+        var len = this.length, retArr = [];
+        if (len < 1) return retArr;
+        if (typeof isStrict !== "boolean") isStrict = false;
+        for (var i = 0;i < len;++i) {
+            if (isStrict) {
+                if (this[i][key] === string) retArr.push(this[i]);
+            } else  {
+                if (this[i][key].indexOf(string) !== -1) retArr.push(this[i]);
+            }
+        }
+        return retArr;
+    };
+    Object.prototype.getNodesText = function () {
+        var len = this.length;
+        var retArr = [];
+        if (len < 1) return retArr;
+        for (var i = 0;i < len;++i) {
+            if (1 === this[i].nodeType) retArr.push(this[i].innerText);
+        }
+        return retArr;
+    }
+    Object.prototype.retVerify = function () {
+        if (0 === this.retcode || "0" === this.retcode) return true;    //判断返回数据是否正常
+        return false;
+    };
+    Object.prototype.delete = function () {
+        if (typeof this.nodeType !== "undefined" && 1 === this.nodeType) {
+            this.parentNode.removeChild(this);
+        }
     };
 
     /****************************************js原型封装**********************************************/
@@ -425,12 +464,7 @@
     }
     //搭配jsonParse验证数据返回码
     c.apiVerify = function (data) {
-        if (
-            (0 === data.retcode || "0" === data.retcode)
-             && 
-            "OK" === data.status
-        ) return true;    //判断返回数据是否正常
-        return false;
+        return data.retVerify();
     }
 
     window.core = c;

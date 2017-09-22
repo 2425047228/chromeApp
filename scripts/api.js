@@ -22,7 +22,12 @@
         gotIt:"/app.php/Home/Merchant/shoujian",    //确认收件    id 订单id
         check:"/app.php/Home/Merchant/jiancha",    //衣物检查    id 订单id
         deleteImage:"/app.php/Home/Merchant/delImages",    //删除衣物检查图片 image 图片路径 orderid 订单id id 项目id
-        checkImageUpload:"/app.php/Home/Merchant/imagesUpload"    //衣物检查图片上传接口  orderid 订单id id 项目id file 文件
+        checkImageUpload:"/app.php/Home/Merchant/imagesUpload",    //衣物检查图片上传接口  orderid 订单id id 项目id file 文件
+        questionSubmit:"/app.php/Home/Merchant/note",    //问题描述提交接口 id 项目id item_note 问题描述以逗号分割的字符串
+        colorSubmit:"/app.php/Home/Merchant/color",    //颜色提交接口 id 项目id color 颜色以逗号分隔的字符串
+        checkDone:"/app.php/Home/Merchant/jiancha_end",    //检查完成数据接口 orderid 订单id
+        cleanDone:"/app.php/Home/Merchant/qingxiwancheng",    //清洗完成 id 订单id
+        getUserInfo:"/app.php/Offline/Member/get_member"    //线下收衣获取用户信息 number 用户会员卡号或手机号
     };
     /**
      * 获取指定成员属性的url

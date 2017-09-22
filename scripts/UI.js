@@ -22,6 +22,22 @@
         }
         core.byId('crumbs').innerHTML = html;
     }
+    u.generateCrumbs = function (array,index) {
+        var body = document.body;
+        var crumbsContainer = core.e('nav');
+        crumbsContainer.id = 'crumbs';
+        body.insertBefore(crumbsContainer,body.children[0]);
+        this.createCrumbs(array,index);
+    };
+    u.searchListener = function (callback) {
+        if (typeof callback === "function") {
+            core.byId('search').onclick = function () {
+                var searchValue = core.byId('search_value').value.trim();
+                if ('' === searchValue) return;
+                callback(searchValue);
+            }
+        }
+    };
 
     /**
      * 创建多个节点
@@ -359,8 +375,9 @@
      * 衣物检查及问题描述样式创建
      * @param obj 项目对象
      */
-    u.createItemChecker = function (obj, checkedArr) {
-        var body = document.body,
+    u.createItemChecker = function (obj, checkedArr, noContent) {
+        var that = this,
+            body = document.body,
             headers = obj.headers,
             options = obj.options,
             chosen = core.byId('chosen'),
@@ -368,19 +385,29 @@
             len = headers.length,
             containers = this.createNodes('section',len,'container'),
             headerNodes = this.createNodes('section',len,'bg-container clearfix'),
-            leftNodes = this.createNodes('div',len,'left'),
             rightNodes = this.createNodes('div',len,'right'),
             toggleNodes = this.createNodes('em',len,'shrink'),
             optionContainers = this.createNodes('section',len),
             optionsArr = [],tempOptions,tempLen,j,tempOptionsLen,o,tempIndex;
         for (var i = 0;i < len;++i) {
             containers[i].appendChild(headerNodes[i]);
-            headerNodes[i].appendChild(leftNodes[i]);
-            leftNodes[i].innerText = headers[i];
+            headerNodes[i].appendChild(core.e('div','left',headers[i]));
             headerNodes[i].appendChild(rightNodes[i]);
             rightNodes[i].appendChild(toggleNodes[i]);
-            if (0 == i) toggleNodes[i].className = 'spread';
             containers[i].appendChild(optionContainers[i]);
+            if (0 == i) {
+                toggleNodes[i].className = 'spread';
+            } else {
+                optionContainers[i].style.display = 'none';
+            }
+            toggleNodes[i].onclick = function () {    //展开收缩效果
+                var optionBox = this.parentNode.parentNode.parentNode.childNodes[1];
+                if (this.className === 'spread') {
+                    this.className = 'shrink';optionBox.style.display = 'none';
+                } else {
+                    this.className = 'spread';optionBox.style.display = 'block';
+                }
+            }
             tempOptions = options[i];
             tempLen = tempOptions.length;
             for (j = 0;j < tempLen;++j) {
@@ -389,7 +416,7 @@
                 for (o = 0;o < tempOptionsLen;++o) {
                     optionsArr[i + j + o] = core.e('div','flex-option checker',tempOptions[j].list[o]);
                     tempIndex = tempOptions[j].list[o].inArray(checkedArr);
-                    if (tempIndex !== false) {
+                    if (tempIndex !== -1) {
                         checkedArr.splice(tempIndex,1);
                         //<div class="flex-center-item">有羽绒服内胆<em class="delete"></em></div>
                         optionsArr[i + j + o].classList.add('checked');
@@ -397,20 +424,89 @@
                         tempChosenDelete = core.e('em','delete');
                         tempChosen.appendChild(tempChosenDelete);
                         chosen.appendChild(tempChosen);
-                        chosenArr.push(tempOptions[j].list[o]);
+                        chosenArr.push({
+                            node:optionsArr[i + j + o],
+                            chosenNode:tempChosen,
+                            text:tempOptions[j].list[o]
+                        });
                         tempChosenDelete.onclick = function () {
                             //删除节点处理
+                            var parentNode = this.parentNode;
+                            var index = parentNode.innerText.inArrayObject(chosenArr,'text');
+                            this.parentNode.parentNode.removeChild(this.parentNode);
+                            if (index !== -1) chosenArr[index].node.classList.remove('checked');
+                            chosenArr.splice(index,1);
                         }
                     }
                     optionContainers[i].appendChild(optionsArr[i + j + o]);
                     optionsArr[i + j + o].onclick = function () {
-                        //取消选中处理
+                        //取消/选中处理
+                        var text = this.innerText;
+                        var nowNode = this;
+                        that.toggleChecked(this,function (status) {
+                            if (status === false) {
+                                console.log(chosenArr);
+                                var index = text.inArrayObject(chosenArr,'text');
+                                if (index !== -1) {
+                                    var chosenNode = chosenArr[index].chosenNode;
+                                    chosenNode.parentNode.removeChild(chosenNode);
+                                    chosenArr.splice(index,1);
+                                }
+                            } else {
+                                var chosenNode = core.e('div','flex-center-item',text);
+                                var chosenNodeDelete = core.e('em','delete');
+                                chosenNode.appendChild(chosenNodeDelete);
+                                chosen.appendChild(chosenNode);
+                                chosenArr.push({
+                                    node:nowNode,
+                                    chosenNode:chosenNode,
+                                    text:text
+                                });
+                                chosenNodeDelete.onclick = function () {
+                                    //删除节点处理
+                                    var parentNode = this.parentNode;
+                                    var index = parentNode.innerText.inArrayObject(chosenArr,'text');
+                                    this.parentNode.parentNode.removeChild(this.parentNode);
+                                    if (index !== -1) chosenArr[index].node.classList.remove('checked');
+                                    chosenArr.splice(index,1);
+                                }
+                            }
+                        })
                     }
                 }
             }
             body.appendChild(containers[i]);
         }
-        return checkedArr;
+        //添加内容输入信息
+        if (typeof noContent !== "undefined" && noContent) return;
+        var contentContainer = core.e('section','container');body.appendChild(contentContainer);
+        var contentTitle = core.e('section','bg-container clearfix');
+        contentContainer.appendChild(contentTitle);
+        contentTitle.appendChild(core.e('div','left','问题填写'));
+        var contentRight = core.e('div','right');
+        contentTitle.appendChild(contentRight);
+        var contentToggle = core.e('em','spread');
+        contentRight.appendChild(contentToggle);
+        var contentBody = core.e('section');
+        contentBody.style.position = 'relative';
+        contentContainer.appendChild(contentBody);
+        var textarea = core.e('textarea','textarea');
+        textarea.setAttribute('maxlength','30');
+        textarea.id = 'content';
+        textarea.value = checkedArr.toString();
+        contentBody.appendChild(textarea);
+        var postfix = core.e('em','postfix-string-num','0/30');
+        contentBody.appendChild(postfix);
+        contentToggle.onclick = function () {
+            if (this.className === 'spread') {
+                this.className = 'shrink';contentBody.style.display = 'none';
+            } else {
+                this.className = 'spread';contentBody.style.display = 'block';
+            }
+        }
+        textarea.onkeyup = textarea.onkeydown = function () {
+            postfix.innerText = this.value.length + '/30';
+        };
         /*<section class="container">
          <section class="bg-container clearfix">
          <div class="left">排污情况</div>
@@ -422,6 +518,7 @@
          <div class="flex-option checker checked">红色</div>
          </section>
          </section>
+
          <section class="container">
          <section class="bg-container clearfix">
          <div class="left">问题填写</div>
