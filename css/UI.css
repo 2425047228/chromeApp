@@ -4,8 +4,11 @@ body{
     min-height: calc(900px - 195px);
     overflow: auto;
 }
+@media screen and (max-height:900px){
+    body{overflow: scroll;}
+}
 .inline-block{display: inline-block;}
-.search,table,th,td,tr,.bg-container,.flex-center-item
+.search,table,th,td,tr,.bg-container,.flex-center-item,
 .checkbox,.checkbox>.checkbox-title,.checkbox>.checkbox-body,.option,.alert-input-area,
 .page>*,.alert-input-area>.input{
     box-sizing: border-box;
