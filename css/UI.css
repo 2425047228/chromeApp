@@ -5,7 +5,7 @@ body{
     overflow: auto;
 }
 @media screen and (max-height:900px){
-    body{overflow: scroll;height: calc(900px - 195px);}
+    body{overflow: scroll;height: 773px;}
 }
 .inline-block{display: inline-block;}
 .search,table,th,td,tr,.bg-container,.flex-center-item,
