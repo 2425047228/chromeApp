@@ -1,7 +1,7 @@
 /*超出屏幕出现滚动条*/
 body{
     max-height: calc(1080px - 195px);
-    min-height: calc(600px - 195px);
+    min-height: calc(900px - 195px);
     overflow: auto;
 }
 .inline-block{display: inline-block;}
