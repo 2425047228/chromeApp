@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../css/init.css">
+    <link rel="stylesheet" href="../../css/UI.css">
+    <style>
+        div,input[type=text]{font-size: 18px;}
+        .flex-container{justify-content: center;}
+        .page-line{padding-bottom: 40px;}
+        .page-text{
+            box-sizing: border-box;-webkit-box-sizing: border-box;
+            border: 1px solid #666666;width: 248px;height: 45px;line-height: 45px;
+            padding-right: 22px;text-align: right;
+        }
+        .page-label{line-height: 43px;}
+    </style>
+</head>
+<body>
+<section class="flex-container">
+    <div style="width: 410px;display: inline-block;padding-top: 55px;">
+        <div class="clearfix page-line">
+            <div class="left">卡号 :</div>
+            <div class="right">4354568672424</div>
+        </div>
+        <div class="clearfix page-line">
+            <div class="left page-label">姓名 :</div>
+            <div class="right"><input type="text" class="page-text"></div>
+        </div>
+        <div class="clearfix page-line">
+            <div class="left">性别 :</div>
+            <div class="right">
+                <em class="radio radio-checked">女</em>
+                &emsp;&emsp;
+                <em class="radio">男</em>
+            </div>
+        </div>
+        <div class="clearfix page-line">
+            <div class="left">手机号 :</div>
+            <div class="right" id="mobile"></div>
+        </div>
+        <div class="clearfix page-line">
+            <div class="left page-label">会员生日 :</div>
+            <div class="right">
+                <div class="select-container">
+                    <div class="select-show">1980-01-01</div><em class="select-postfix"></em>
+                    <div class="select-children select">
+                        <div class="option">1998</div>
+                        <div class="option">1998</div>
+                        <div class="option">1998</div>
+                        <div class="option">1998</div>
+                        <div class="option">1998</div>
+                        <div class="option">1998</div>
+                        <div class="option">1998</div>
+                    </div>
+                    <!--<div class="select-children">dfdfdfddf</div>-->
+                </div>
+            </div>
+        </div>
+        <div style="padding-top: 60px;text-align: center;">
+            <input type="button" value="收衣下单" class="tab-btn tab-btn-larger">
+        </div>
+    </div>
+</section>
+<script src="../../scripts/api.js"></script>
+<script src="../../scripts/core.js"></script>
+<script src="../../scripts/UI.js"></script>
+<script src="../../scripts/offline/register.js"></script>
+</body>
+</html>

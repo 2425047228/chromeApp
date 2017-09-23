@@ -45,7 +45,7 @@ window.onload = function () {
                         }
                     }
                 } else {
-                    core.notice(jsonData.status);
+                    return location.href = './register.html?mobile=' + searchValue;
                 }
             });
         }
