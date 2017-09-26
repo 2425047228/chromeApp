@@ -29,12 +29,58 @@
         body.insertBefore(crumbsContainer,body.children[0]);
         this.createCrumbs(array,index);
     };
+
+    /**
+     * 搜索框搜索监听
+     * @param callback 回调函数
+     * @return void
+     */
     u.searchListener = function (callback) {
         if (typeof callback === "function") {
             core.byId('search').onclick = function () {
                 var searchValue = core.byId('search_value').value.trim();
                 if ('' === searchValue) return;
                 callback(searchValue);
+            }
+        }
+    };
+    
+    /**
+     * 单选框监听
+     * @param callback 回调函数
+     * @return void
+     */
+    u.radioListener = function (callback) {
+        var radios = core.byClass('radio'),len = radios.length;
+        if (len < 1 || 'function' !== typeof callback) return;
+        for (var i = 0;i < len;++i) {
+            radios[i].onclick = function () {
+                if (this.classList.contains('radio-checked')) return;
+                var groupList = radios;
+                if ('undefined' !== typeof this.dataset.group) {
+                    groupList = groupList.filtrationForDataSet('group',this.dataset.group);
+                }
+                groupList.removeClass('radio-checked');
+                this.classList.add('radio-checked');
+                callback(this);
+            }
+        }
+    };
+    u.selectListener = function (callback,tagNumber) {
+        if ('number' !== typeof tagNumber) tagNumber = 0;
+        var selection = core.byTagName('select')[tagNumber];
+        if ('undefined' !== typeof selection) {
+            selection.onclick = function () {
+                if (this.classList.contains('select-spread')) {
+                    this.removeAttribute('size');
+                    this.classList.remove('select-spread');
+                } else {
+                    this.setAttribute('size', '10');
+                    this.classList.add('select-spread');
+                }
+            };
+            selection.onchange = function () {
+                'function' === typeof callback && callback(this.value);
             }
         }
     };
@@ -51,6 +97,14 @@
         for (var i = 0;i < number;++i) {
             retArr.push(core.e(nodeName));
             if (typeof className !== "undefined") retArr[i].className = className;
+        }
+        return retArr;
+    };
+    u.createNodesForText = function (nodeName,number,textArr) {
+        var retArr = [];
+        if (number < 1) return retArr;
+        for (var i = 0;i < number;++i) {
+            retArr.push(core.e(nodeName,null,textArr[i]));
         }
         return retArr;
     };

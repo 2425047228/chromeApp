@@ -27,8 +27,10 @@
         colorSubmit:"/app.php/Home/Merchant/color",    //颜色提交接口 id 项目id color 颜色以逗号分隔的字符串
         checkDone:"/app.php/Home/Merchant/jiancha_end",    //检查完成数据接口 orderid 订单id
         cleanDone:"/app.php/Home/Merchant/qingxiwancheng",    //清洗完成 id 订单id
-        getUserInfo:"/app.php/Offline/Member/get_member"    //线下收衣获取用户信息 number 用户会员卡号或手机号
-    };
+        getUserInfo:"/app.php/Offline/Member/get_member",    //线下收衣获取用户信息 number 用户会员卡号或手机号
+        getNewUcode:"/app.php/Offline/Merchant/ucode",    //获取最新卡号
+        addNewMember:"/app.php/Offline/Member/add_member"    //新增散客 ucode=会员编号 uname=会员姓名 sex=性别 mobile=手机号 birthday=会员生日
+};
     /**
      * 获取指定成员属性的url
      * @param uri 指定成员属性

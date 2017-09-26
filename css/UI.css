@@ -13,7 +13,7 @@ body{
     body{overflow: scroll;height: calc(900px - 192px);}
 }
 .inline-block{display: inline-block;}
-.search,table,th,td,tr,.bg-container,.flex-center-item,.select,
+.search,table,th,td,tr,.bg-container,.flex-center-item,
 .checkbox,.checkbox>.checkbox-title,.checkbox>.checkbox-body,.option,.alert-input-area,
 .page>*,.alert-input-area>.input{
     box-sizing: border-box;
@@ -58,21 +58,10 @@ input,button,textarea,select,option{border: none;outline: none;}
 /*下拉框子级浮动样式*/
 .select-children{display: inline-block;position: absolute;top: 0;left: calc(100% + 6px);}
 /*自定义普通下拉框样式*/
-.select{
-    display:inline-block;width: 84px;height: 30px;line-height: 30px;overflow: hidden;
-    border: 1px solid #808080;
-    background: #f1f1f1;
-    background-image: url(../images/select-normal.png);
-    background-repeat: no-repeat;
-    background-position: calc(100% - 6px) center;
-    padding-right: 21px;
-}
-.select-spread{
-    height:auto;max-height:276px;background: none;overflow: auto;
-}
-.select>.option{width: 100%;height: 28px;text-align: center;background: white;}
-/*.select-option{width: 84px;height: 30px;}*/
-/*.select-option,.select-option>option{border: 1px solid #808080;}*/
+.select-normal{display:inline-block;border: 1px solid #808080;font-size: 14px;padding: 6px 4px;}
+.select-normal option{padding: 6px 3px;}
+.select-normal option:first-child{padding-top: 1px;}
+.select-spread{height:auto;}    /*展开样式*/
 .radio-checked{background-image: url(../images/radio-checked.png);}
 /*添加图标样式*/
 .add{background: url(../images/add.png) no-repeat center left;}

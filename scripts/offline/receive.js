@@ -17,29 +17,32 @@ window.onload = function () {
         if (null === id) return false;
     }
     UI.searchListener(function (value) {
-        console.log(id);
         if (value === searchValue) return false;
         searchValue = value;
         var reg = /^(\d|\w)+$/;
         if (value.match(reg) !== null) {
             core.postFormData(api.getUrl('getUserInfo'),{token:token,number:value},function (json) {
                 var jsonData = json.parseJson();
-                console.log(jsonData);
                 if (jsonData.retVerify()) {
+                    console.log(jsonData);
                     var data = jsonData.data;
                     id = data.id;
                     name.innerText = data.username;
                     mobile.innerText = data.mobile;
                     time.innerText = data.join_time;
-                    platform_card_number.innerText = data.platform_card.card_number;
-                    platform_card_name.innerText = data.platform_card.card_type == 1 ? '金牌会员卡' : '钻石会员卡';
-                    platform_card_balance.innerHTML = '&yen;' + data.platform_card.card_sum;
+                    if ('undefined' !== typeof data.platform_card.card_number) {
+                        platform_card_number.innerText = data.platform_card.card_number;
+                        platform_card_name.innerText = data.platform_card.card_type == 1 ? '金牌会员卡' : '钻石会员卡';
+                        platform_card_balance.innerHTML = '&yen;' + data.platform_card.card_sum;
+                    } else {
+                        platform_card_number.innerText = platform_card_name.innerText = platform_card_balance.innerHTML = '';
+                    }
                     merchant_card_number.innerText = data.card_number;
                     merchant_card_name.innerText = data.card_name;
                     merchant_card_balance.innerHTML = '&yen;' + data.balance;
                     var len = data.orders.length;
+                    orders.innerHTML = null;
                     if (len > 0) {
-                        orders.innerHTML = null;
                         for (i = 0;i < len;++i) {
                             orders.appendChild(core.e('div',null,data.orders[i]));
                         }

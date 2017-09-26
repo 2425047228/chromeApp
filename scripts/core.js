@@ -6,6 +6,24 @@
 
 (function(window){
     /****************************************js原型封装**********************************************/
+    Number.prototype.getFullYearList = function () {
+        var currentYear = new Date().getFullYear(),retArr = [],number = this;
+        while (number <= currentYear)
+        {
+            retArr.push(number);
+            ++number;
+        }
+        return retArr;
+    };
+    Number.prototype.getNumberList = function () {
+        var retArr = [];
+        if (this > 0) {
+            for (var i = 1;i <= this;++i) {
+                retArr.push(i);
+            }
+        }
+        return retArr;
+    };
     String.prototype.inArrayObject = function (array,type) {
         var len = array.length;
         if (len < 1) return -1;
@@ -80,17 +98,62 @@
             if (1 === this[i].nodeType) retArr.push(this[i].innerText);
         }
         return retArr;
-    }
+    };
     Object.prototype.retVerify = function () {
         if (0 === this.retcode || "0" === this.retcode) return true;    //判断返回数据是否正常
         return false;
     };
-    Object.prototype.delete = function () {
-        if (typeof this.nodeType !== "undefined" && 1 === this.nodeType) {
+    Node.prototype.removeChildByTagName = function (tagName) {
+        var nodes = this.childNodes,len = nodes.length;
+        if (len > 0) {
+            for (var i = 0;i < len;++i) {
+                if (1 === nodes[i].nodeType && nodes[i].nodeName === tagName.toUpperCase()) {
+                    this.removeChild(nodes[i]);--i;--len;    //nodes动态减少
+                }
+            }
+        }
+    };
+    Node.prototype.appendChildren = function (nodeList) {
+        var len = nodeList.length;
+        if (len > 0) {
+            for (var i = 0;i < len;++i) {
+                1 === nodeList[i].nodeType && this.appendChild(nodeList[i]);
+            }
+        }
+    };
+    NodeList.prototype.delete = function () {
+        if ('undefined' !== typeof this.nodeType && 1 === this.nodeType) {
             this.parentNode.removeChild(this);
         }
     };
+    NodeList.prototype.addClass = function (className) {
+        var len = this.length;
+        if (len > 0) {
+            for (var i = 0;i < len;++i) {
+                1 === this[i].nodeType && this[i].classList.add(className);
+            }
+        }
+    };
+    NodeList.prototype.removeClass = function (className) {
+        var len = this.length;
+        if (len > 0) {
+            for (var i = 0;i < len;++i) {
+                1 === this[i].nodeType && this[i].classList.remove(className);
+            }
+        }
+    };
 
+    NodeList.prototype.filtrationForDataSet = function (key,value) {
+        var len = this.length,retArr = [];
+        if (len < 1) return retArr;
+        for (var i = 0;i < len;++i) {
+            1 === this[i].nodeType &&
+            'undefined' !== typeof this[i].dataset[key] &&
+            this[i].dataset[key] === value &&
+            retArr.push(this[i]);
+        }
+        return retArr;
+    };
     /****************************************js原型封装**********************************************/
     var formValidator = function() {
         this.__proto__ = null;
@@ -113,7 +176,7 @@
         e:function (nodeName,className,text) {
             var node = document.createElement(nodeName);
             if (typeof className === "string") node.className = className;
-            if (typeof text === "string") node.innerText = text;
+            if ('string' === typeof text || 'number' === typeof text) node.innerText = text;
             return node
         },    //创建节点
         byClass:function (className) {return document.querySelectorAll('.' + className);},
@@ -122,7 +185,9 @@
         show:function (node) {node.setAttribute("style","display:block");},
         hide:function (node) {node.setAttribute("style","display:none");},
         formValidator:new formValidator(),    //表单验证器
-        validatorSwitch:true    //表单验证器开关，默认开启
+        validatorSwitch:true,    //表单验证器开关，默认开启
+        getMonthList:function () {return [1,2,3,4,5,6,7,8,9,10,11,12];},
+        getMaxDate:function (year,month) {return new Date(year,month,0).getDate();}
     };
 
     /**
