@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../css/init.css">
+    <link rel="stylesheet" href="../../css/UI.css">
+    <style>
+        .left{font-size: 16px;}
+        .clearfix>.left:first-child{width: 152px;}
+        .page-input1{height: 34px;border:1px solid grey;width: 150px;}
+        input[type=text]{padding-left: 10px;}
+        .left>p{line-height: 50px;}
+    </style>
+</head>
+<body>
+<section class="container clearfix">
+    <div class="left">我的二维码:</div>
+    <div class="left">
+        <img id="qrcode" src="" style="height: 94px;width: 94px;">
+    </div>
+</section>
+<section class="container clearfix">
+    <div class="left">门店电话:</div>
+    <div class="left"><input type="text" id="phone" style="width: 200px;height: 34px;border:1px solid grey;"></div>
+</section>
+<section class="container clearfix">
+    <div class="left">服务范围:</div>
+    <div class="left"><input type="text" id="round" class="page-input1">&emsp;km</div>
+</section>
+<section class="container clearfix">
+    <div class="left">上门服务费:</div>
+    <div class="left" style="line-height: 30px;">
+        <p>上门服务费:&nbsp;<input type="text" class="page-input1" id="amount">&nbsp;元</p>
+        <p>&emsp;&emsp;满减数:&nbsp;<input type="text" class="page-input1" id="piece">&nbsp;件</p>
+        <p>&emsp;满减金额:&nbsp;<input type="text" class="page-input1" id="reduce">&nbsp;元</p>
+    </div>
+</section>
+<section class="container clearfix">
+    <div class="left">专店会员卡:</div>
+    <div class="left" id="card"  style="line-height: 30px;"></div>
+</section>
+<section class="container clearfix">
+    <div class="left">&nbsp;</div><div class="left"><input type="button" value="确认" class="tab-btn" id="confirm"></div>
+</section>
+<script src="../../scripts/api.js"></script>
+<script src="../../scripts/core.js"></script>
+<script src="../../scripts/UI.js"></script>
+<script src="../../scripts/management/info-editor.js"></script>
+</body>
+</html>
